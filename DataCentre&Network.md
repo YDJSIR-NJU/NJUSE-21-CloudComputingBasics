@@ -129,7 +129,7 @@ IT服务操作→IT服务管理→数据中心自动化
 
 低成本、高可扩展性、低配置开销、健壮性、节能
 
-![image-20211007165852052](C:\Users\YuDongjun\Desktop\NJU\2021-Fall\CloudComputing\NJUSE-21-Cloud\DataCentre&Network.assets\image-20211007165852052.png)
+![image-20211007165852052](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007165852052.png)
 
 ### 传统树状网络
 
@@ -168,11 +168,11 @@ IT服务操作→IT服务管理→数据中心自动化
 
 ##### K=4
 
-![image-20211007171242995](C:\Users\YuDongjun\Desktop\NJU\2021-Fall\CloudComputing\NJUSE-21-Cloud\DataCentre&Network.assets\image-20211007171242995.png)
+![image-20211007171242995](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007171242995.png)
 
 ##### K=6
 
-![image-20211007171406307](C:\Users\YuDongjun\Desktop\NJU\2021-Fall\CloudComputing\NJUSE-21-Cloud\DataCentre&Network.assets\image-20211007171406307.png)
+![image-20211007171406307](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007171406307.png)
 
 ### 改进树：VL2
 
@@ -212,7 +212,7 @@ VL2依赖于中心化的基础设施来实现2层语义和资源整合，面临�
 
 #### 示例
 
-![image-20211007171921746](DataCentre&Network.assets/image-20211007171921746.png)
+![image-20211007171921746](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007171921746.png)
 
 ### 递归层次网络概述
 
@@ -252,15 +252,15 @@ $$
 
 #### 示例
 
-![image-20211007172838631](DataCentre&Network.assets/image-20211007172838631.png)
+![image-20211007172838631](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007172838631.png)
 
 第一层勉强能画
 
-![image-20211007223248803](DataCentre&Network.assets/image-20211007223248803.png)
+![image-20211007223248803](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007223248803.png)
 
 第二层的只好画两口的情况（这也太难画了）
 
-![image-20211007223125038](DataCentre&Network.assets/image-20211007223125038.png)
+![image-20211007223125038](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007223125038.png)
 
 ### 递归层次：FiConn
 
@@ -285,11 +285,11 @@ $$
 
 #### 示例
 
-![image-20211007200037345](DataCentre&Network.assets/image-20211007200037345.png)
+![image-20211007200037345](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007200037345.png)
 
 在这里把2层FiConn画了一下。
 
-![image-20211007212947668](DataCentre&Network.assets/image-20211007212947668.png)
+![image-20211007212947668](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007212947668.png)
 
 ### 递归层次：BCube
 
@@ -315,7 +315,7 @@ $$
 
 #### 示例
 
-![image-20211007234848083](DataCentre&Network.assets/image-20211007234848083.png)
+![image-20211007234848083](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007234848083.png)
 
 ### 光交换网络
 
@@ -329,7 +329,7 @@ $$
 
 - 接入交换机连接电交换和光交换网络
 
-![image-20211007235452548](DataCentre&Network.assets/image-20211007235452548.png)
+![image-20211007235452548](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007235452548.png)
 
 #### OSA (`Optical Switching Architecture`)基于光交换的数据中心网络体系结构
 
@@ -341,7 +341,7 @@ $$
 
   将从通用端口进入的波长集和分开在N个波长端口
 
-![image-20211007235540789](DataCentre&Network.assets/image-20211007235540789.png)
+![image-20211007235540789](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007235540789.png)
 
 - 更高的传输效率；
 
@@ -358,7 +358,7 @@ $$
 
 - `WDCN`异构的以太网/无线体系结构；
 
-![image-20211007235746106](DataCentre&Network.assets/image-20211007235746106.png)
+![image-20211007235746106](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211007235746106.png)
 
 - 无需重新布线即可灵活调整拓扑结构；
 - 提供足够带宽的前提下传输距离有限；
@@ -371,7 +371,7 @@ $$
 
 #### 结构
 
-![image-20211008104536264](DataCentre&Network.assets/image-20211008104536264.png)
+![image-20211008104536264](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211008104536264.png)
 
 | 层级       | 说明                                                         |
 | ---------- | ------------------------------------------------------------ |
@@ -395,4 +395,4 @@ Openflow，第一个针对SDN实现的标准接口。
 
 起源于斯坦福Clean Slate计划。
 
-![image-20211008124902795](DataCentre&Network.assets/image-20211008124902795.png)
+![image-20211008124902795](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/DataCentreNetwork.assets/image-20211008124902795.png)

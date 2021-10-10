@@ -66,7 +66,7 @@
 
 大数据时代（2008）
 
-![image-20210924111120703](Basics.assets/image-20210924111120703.png)
+![image-20210924111120703](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924111120703.png)
 
 - ==3V==： Volume(量大), Variety(多样), Velocity(快速), 
 
@@ -76,7 +76,7 @@
 
 **一切皆为** **(** **`wéi`** **)** **大数据，一切皆为** **(** **`wèi`** **)** **大数据。**
 
-![image-20210924111315108](Basics.assets/image-20210924111315108.png)
+![image-20210924111315108](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924111315108.png)
 
 ## 概述
 
@@ -118,7 +118,7 @@
 
 #### 概念模型
 
-![image-20210924110619624](Basics.assets/image-20210924110619624.png)
+![image-20210924110619624](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924110619624.png)
 
 #### 现实故事
 
@@ -129,7 +129,7 @@
 |              商业               |            技术            |
 | 2006年3月，Computing Cloud，EC2 | 2006年8月，Cloud Computing |
 
-![image-20210924114900657](Basics.assets/image-20210924114900657.png)
+![image-20210924114900657](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924114900657.png)
 
 ### 为何称“云”？
 
@@ -161,15 +161,15 @@
 
 #### 三种基本服务模型
 
-![image-20210924112233030](Basics.assets/image-20210924112233030.png)
+![image-20210924112233030](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924112233030.png)
 
 > `aaS`的例子还有很多，毕竟可以构词。但最基础的就上面三种。下图更好地呈现了三种`aaS`之间的关系，并引入了一个`DaaS`：Data as a Service
 
-![image-20210924112144094](Basics.assets/image-20210924112144094.png)
+![image-20210924112144094](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924112144094.png)
 
 > 下图则从用户视角对比三种服务模型。
 
-![image-20210924113120032](Basics.assets/image-20210924113120032.png)
+![image-20210924113120032](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924113120032.png)
 
 #### IaaS
 
@@ -221,13 +221,13 @@
 
 特点：松耦合，定义并发布接口，基于标准的通信模型（如REST）
 
-![image-20210924113302549](Basics.assets/image-20210924113302549.png)
+![image-20210924113302549](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924113302549.png)
 
-![image-20210924113321833](Basics.assets/image-20210924113321833.png)
+![image-20210924113321833](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924113321833.png)
 
 ==管理中间件层==和==资源池层==是云计算技术的最关键部分，SOA构建层的功能更多依靠外部设施提供。
 
-![image-20210924114131799](Basics.assets/image-20210924114131799.png)
+![image-20210924114131799](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924114131799.png)
 
 ### 部署模型
 
@@ -255,7 +255,7 @@
 
 全球企业IT开销发展趋势：能耗接近硬件成本；管理成本线性增长。
 
-![image-20210924114552403](Basics.assets/image-20210924114552403.png)
+![image-20210924114552403](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924114552403.png)
 
 #### 可拓展性与可伸缩性
 
