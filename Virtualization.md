@@ -86,7 +86,7 @@ Hypervisor或VMM负责控制硬件和“传话”。比如说各类指令集虚�
 
 ## 操作系统级虚拟化
 
-该方式可看作是“寄居虚拟化”的一种。在该方式下没有`Hypervisor/VMM`。实现方法是在操作系统中插入一个虚拟化层，而后在同一个操作系统内核内，运行多个虚拟机。这种类型的典型代表是`OpenVZ`——几乎是最廉价的`VPS`实现方案。此处的“虚拟机”被称为虚拟执行环境(`Virtual Execution Environment`)或虚拟专用系统(`Virtual Private System`)或`容器`。
+该方式可看作是“寄居虚拟化”的一种。在该方式下没有`Hypervisor/VMM`。实现方法是在操作系统中插入一个虚拟化层，而后在同一个操作系统内核内（共享内核），运行多个虚拟机。这种类型的典型代表是`OpenVZ`——几乎是最廉价的`VPS`实现方案。此处的“虚拟机”被称为虚拟执行环境(`Virtual Execution Environment`)或虚拟专用系统(`Virtual Private System`)或`容器`。
 
 ### 优缺点
 
