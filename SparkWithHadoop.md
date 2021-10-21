@@ -798,6 +798,18 @@ RDD是高度受限的共享内存模型。
 
 ### `Shuffle`
 
+#### 【1】RDD创建过程
+
+构建`RDD`时确定好与父RDD之间的依赖关系，如果是`ShuffleDependency`，会向`ShuffleManager`注册，获取`Handle`，用来保存父RDD的相关信息。
+
+#### 【2】`RDD`计算过程
+
+在实际计算时，`runTask`会调用`RDD compute`方法，其中根据`dependency`获取`reader`读取用来计算`RDD`的输入数据，也就是之前`shuffle`操作写入的数据。
+
+#### 【3】`Task`结束处理
+
+当`runTask`完成计算后，获取子`RDD`之间的依赖关系，如果是`shuffle`依赖则同样通过`dependency`和`ShuffleManager`获得`Handle`，进而获得`writer`。
+
 #### 可插拔的`Shuffle`框架
 
 •`ShuffleDependency`，`ShuffleManager`，`ShuffleHandle`
@@ -805,18 +817,6 @@ RDD是高度受限的共享内存模型。
 •`ShuffleReader`，`ShuffleWriter`
 
 •`ShuffleMapTask`，`ResultTask`
-
-#### RDD创建过程
-
-【1】构建`RDD`时确定好与父RDD之间的依赖关系，如果是`ShuffleDependency`，会向`ShuffleManager`注册，获取`Handle`，用来保存父RDD的相关信息。
-
-#### `RDD`计算过程
-
-【2】在实际计算时，`runTask`会调用`RDD compute`方法，其中根据`dependency`获取`reader`读取用来计算`RDD`的输入数据，也就是之前`shuffle`操作写入的数据。
-
-#### `Task`结束处理
-
-【3】当`runTask`完成计算后，获取子`RDD`之间的依赖关系，如果是`shuffle`依赖则同样通过`dependency`和`ShuffleManager`获得`Handle`，进而获得`writer`。
 
 #### 拓展
 
@@ -836,8 +836,278 @@ RDD是高度受限的共享内存模型。
 
 ##### `Spark 1.4`：钨丝计划——优化内存管理模型
 
-直接使用二进制数据，而不是`Java`对象；避免序列化和反序列化开销。
+直接使用==二进制数据==，而不是`Java`对象；避免序列化和反序列化开销。
 
 ## 部署实验
 
 详情参见 https://ydjsir.com.cn/2021/10/17/initSpark/。
+
+## "实践"
+
+> 参考：https://spark.apache.org/docs/2.1.1/programming-guide.html
+
+### 基础
+
+#### 从数据源到RDD
+
+- `parallelize()` （把一个普通的collection变成支持分布式的）
+- `textFile(path)`
+- `hadoopFile(path)`
+- `sequenceFile(path)`
+- `objectFile(path)`
+- `binaryFiles(path)`
+- ……
+
+#### 从RDD到目标数据
+
+•`saveAsTextFile(path)`
+
+•`saveAsSequenceFile(path)`
+
+•`saveAsObjectFile(path)`
+
+•`saveAsHadoopFile(path)`
+
+•……
+
+#### 二次排序
+
+- 指在==归约（reduce）阶段==对==某个键关联的值==排序；
+- ==Map阶段==可以对`<key, value>`对按照键的值进行排序，但是归约器不会自动对键值对按照值排序；但是有时候需要：将成绩按照班级==归约后排序==；店铺产品销量排序等
+
+##### 例：按照`name`（第一标准）和`time`（第二标准）对`value`排序
+
+![image-20211021093117197](SparkWithHadoop.assets/image-20211021093117197.png)
+
+归约只能做到按照`name`把值区分开，但是分好后再对`value`按照`time`排序时，需要进行二次排序。
+
+##### 方案1：在内存中实现排序，只借助`Map-Reduce`框架进行分组
+
+组内直接在内存中调用排序函数。
+
+- 创建`SparkContext`对象；连接到`Spark master`；读取原始数据；
+- 构建<键,值>对;
+- 按照键分组：`groupByKey`；
+- 对每个组对应的新的value(是一个列表)进行排序操作；
+
+不具备伸缩性，单个服务器的内存又成为瓶颈。
+
+##### 方案2.1：利用框架实现值排序
+
+自定义Key + `sortByKey()`：组合键。
+
+- 自定义组合键：`<<name, time>, value>`；
+- 调用`sortByKey`时会用`<name, time>`排序，因此要比较`<name, time>`大小；
+- 在自定义`Key`中定义好`compare`方法；
+- 按照自定义Key格式实现`mapToPair`
+- 最后调用`sortByKey()`
+
+##### 方案2.2：使用组合键 + `groupByKey()`
+
+![image-20211021094415780](SparkWithHadoop.assets/image-20211021094415780.png)
+
+#### `TOP N`列表
+
+##### 基本思路
+
+在每一个`Partition`内取本地的`Top N`；将所有本地`Top N`合并，再取全局`Top N`。
+
+###### 使用`mapPartitions()`
+
+- 对`RDD`的每一个`Partition`进行操作；
+- 输入是整个`Partition`的数据，每一个`Task`对应处理一个`Partition`；
+- 结果`RDD`与输入`RDD`有相同个数的`Partition`；
+- 结果`RDD`的每一个`Partition`就是局部`Top N`；
+
+###### 对保存所有局部`Top N`的`RDD`进行`action`操作
+
+- 用`collect`方法将局部`Top N`存放到`list`中
+- 遍历`list`，选出全局`Top N`
+
+###### 使用框架的`reduce`操作
+
+定义两两合并的规则。
+
+##### 一种可行的解
+
+- 使用框架的`takeOrdered(N, DefineComparator)`
+- 支持自定义`Comparator`
+- 得到`JavaPairRDD`后，直接使用`takeOrdered`获得全局`Top N`
+
+### `Spark SQL`
+
+Spark SQL是`Spark Core`上的一个模块，所有`SQL`操作被`Catalyst`翻译成类似普通`Spark`程序一样的代码，被`Spark Core`调度执行，过程也有`Job`、`Stage`和`Task`概念。
+
+它是根据待处理数据和待执行计算的结构信息，做了额外优化。
+
+#### Spark Catalyst
+
+- 解析、优化`Spark SQL`语句，最终生成`Java`字节码；
+- 使用核心数据结构-树-存储`SQL`语句；
+- 使用基础概念-规则-对`SQL`语句对应的计算进行优化；
+
+![image-20211021100418147](SparkWithHadoop.assets/image-20211021100418147.png)
+
+| 实际用例                                                     | Catalyst                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![image-20211021100100958](SparkWithHadoop.assets/image-20211021100100958.png) | ![image-20211021100111405](SparkWithHadoop.assets/image-20211021100111405.png) |
+
+#### 使用途径
+
+##### 使用`SQL`语句进行数据查询
+
+- `Spark SQL`可以读取`Hive`上的数据；
+- 可以在程序中执行`SQL`查询，结果以`dataset/dataframe`形式返回；
+- 通过命令行使用`SQL`命令；
+
+##### 在程序中使用`Dataset API`
+
+- `Dataset`也是分布式数据集合，具有与`RDD`一样的优点，还根据`Spark SQL`引擎的特性进行了优化；
+- 可以从`JVM`中的对象构建并使用类似`RDD`可用的`Transformation`操作；
+
+##### `Dataframe`：也是一种`Dataset`，数据有列的概念，类似关系型数据库的“表”概念。
+
+- 比`Dataset`更加丰富的操作；
+- 多种来源：结构化数据文件，`Hive表`，外部数据库，`RDD`；
+
+### `Spark Streaming`
+
+> 这几张图检索一下就会发现来自于Spark官方文档
+
+#### `Structured Streaming`
+
+`Structured Streaming`基于`Spark SQL engine`。 
+
+在动态变化的数据集上实现流式计算就像在静态数据集上做计算一样方便。
+
+![image-20211021101018873](SparkWithHadoop.assets/image-20211021101018873.png)
+
+#### 对`DataFrames/DataSets`进行多种操作
+
+##### 基本操作
+
+- `select`, `projection`, `aggregation`, `groupBy`, `groupByKey`, `filter`……
+- 创建数据表，并使用SQL操作
+- 判断是否是流
+
+##### Window Operations on Event Time
+
+![image-20211021101455071](SparkWithHadoop.assets/image-20211021101455071.png)
+
+5分钟统计一次，10分钟是一个窗口。统计的不仅仅是从开始时间点到数据截止时的总出现次数，而是这10分钟的窗口期内出现的次数。
+
+##### Handling Late Data and Watermarking
+
+![image-20211021101806557](SparkWithHadoop.assets/image-20211021101806557.png)
+
+迟一点不要紧，一样可以更新在表格里面。但是等待不是没有限度的，在那个`watermark`线以下的就直接`ignore`了。
+
+![image-20211021101912017](SparkWithHadoop.assets/image-20211021101912017.png)
+
+###### 启动计算
+
+当定义好最后一个`DataFrames`或`DataSets`，就剩下启动流计算了。
+
+**输出的细节**: 数据格式和位置等.
+
+**输出模式**：每一次计算之后哪些数据被写入，包括Append模式，Complete模式和Update模式.
+
+**应用名称**: 可选的，为该结构化流计算命名，是唯一的.
+
+**触发时间间隔**: 可选的，定义每一次计算的触发时间间隔. 如果不设置，则在上一次计算结束后立即启动. 如果上一次计算太久导致错过设置的触发时间，系统不会等待下一个时间间隔，而是上一个任务结束就启动计算。
+
+**检查点存储位置**: 应该是一个和HDFS兼容的高容错文件系统目录。
+
+**内置的可写入输出**：`File sink`, `Kafka sink`, `Foreach sink`, `Console sink`, `Memory sink`。 
+
+#### `Streaming`
+
+实现可扩展、高吞吐、高容错的实时数据流处理。
+
+![image-20211021102348551](SparkWithHadoop.assets/image-20211021102348551.png)
+
+##### 部署条件
+
+集群要求，JAR要求，配置要求，检查点配置，重启配置，日志配置，流配置等等。
+
+- 执行监控
+- 性能优化
+- 降低数据处理时间（数据接收并行化、数据处理并行化、数据序列化、任务数量控制）
+- 巧妙设置时间间隔
+- 内存优化
+- 容错
+
+如何对已经部署的应用进行更新？
+
+- 数据写入多个地方，同时启动更新应用；
+- 停止旧应用再启动新应用；
+
+##### 需要注意的地方
+
+- 一旦一个流计算过程在`Context`中启动后，这个`Context`不可以再新建新的流计算过程；
+- 一旦`Context`停止后，不可以被重新启动——只能重新提交`Application`；
+- 一个`JVM`一次只能运行一个`StreamingContext`；
+- `StreamingContext`的`stop`方法也会停止`SparkContext`，除非指定不停止`SparkContext`；
+- `SparkContext`如果不停止，可以用于重复建立新的`StreamingContext`；
+
+### `Spark GraphX`
+
+图计算：以图为数据结构基础的相关算法及应用。
+
+#### `GraphX`提供的`API`
+
+- 图生成。
+- 图数据访问：查询顶点数、边数；计算某个点的入度、出度等。
+- 图算法：遍历顶点、边；计算连通性；计算最大子图；计算最短路径；图合并等。
+
+#### `GraphX`的实现
+
+- 核心是`Graph`数据结构，表示有向多重图；
+- 两个顶点间允许存在多条边，表示不同含义；
+- `Graph`由顶点`RDD`和边`RDD`组成；
+- `Graph`的分布式存储方式；
+
+#### 细节
+
+##### 图生成
+
+- 读入存储关系信息的文件，构造`EdgeRDD：eRDD = sc.textFile()`；
+- 从`Edge RDD`构造`Graph：graph = Grapth.fromEdges(eRDD)`；
+
+##### 基本接口
+
+- 获取边数：`numEdges`；获取节点数：`numVertices`；
+- 获取入度、出度：`inDegrees`, `outDegrees`；
+- 结构操作：`reverse`，`subgraph`, `mask` ；
+
+##### 关联类操作
+
+- 将一个图和一个`RDD`通过顶点`ID`关联起来，使图获得`RDD`信息；
+- `joinVertices`；
+- `outerJoinVertices`； 
+
+##### 聚合类操作
+
+- 分布式遍历所有的边，执行自定义的`sendMsg`函数；
+- 在节点上执行`mergeMsg`函数；
+
+### `Spark MLlib`
+
+Spark为机器学习问题开发的库。支持分类、回归、聚类和协同过滤等。
+
+#### 基础数据类型
+
+- 向量
+- 带标注的向量：用于监督学习
+- 模型：训练算法的输出
+
+#### 主要的库
+
+- `mllib.classification`:分类算法，二分类、多分类、逻辑回归、朴素贝叶斯、SVM等；
+- `mllib.cluster`：聚类，`K-Means`、`LDA`等；
+- `mllib.recommendation`：使用协同过滤的方法做推荐；
+- `mllib.tree`：决策树、随机森林等算法；
+
+#### 其它常用库
+
+`mllib.evaluation`：算法效果衡量方法。

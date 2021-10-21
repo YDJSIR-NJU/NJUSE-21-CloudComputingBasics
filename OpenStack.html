@@ -1,0 +1,726 @@
+<!doctype html>
+<html style='font-size:13px !important'>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>OpenStack</title><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^="mermaidChart"] { line-height: 1em; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+
+
+/* ============================================
+ * ============ TYPORA lATEX THEME ============
+ * ============================================
+ */
+
+/* userCustom on Windows */
+
+:root {
+
+/* == 字体设置 == */
+
+	/* 基准字体 */
+	--base-Latin-font: "Latin Modern Roman", "Latin Modern Roman 10"; /* 备选：Times, "Times New Roman" */
+	--base-Chinese-font: 宋体-简, 华文宋体;
+	--base-font-size: 9.5pt;
+
+	/* 引言字体 */
+	--quote-font: "Latin Modern Roman", "Latin Modern Roman 10", Times, "Times New Roman", 华文仿宋;
+	--quote-font-size: 10pt; /* 这里字体用了10pt,比正文字体稍大 */
+
+	/* 代码字体（代码中的中文会调用ui-font） */
+	--code-font: "Latin Modern Mono", "Latin Modern Mono 10";
+
+	/* 侧边栏字体 */
+	--ui-font: "阿里巴巴普惠体 2.0";
+
+	/* source mode 字体 */
+	--sourceMode-font: "SF Mono", "阿里巴巴普惠体 2.0"; /* 默认调用code-font和ui-font */
+
+	/* 目录字体 */
+	--toc-font: ""; /* 默认调用base-font */
+	--toc-font-size: ""; /* 默认调用base-font-size */
+
+	/* 表格字体 */
+	--table-title-font: ""; /* 默认调用heading-font */
+	--table-font: ""; /* 默认调用base-font */
+
+	/* 标题字体（总设置） */
+	--heading-Latin-font: var(--base-Latin-font); /* 默认调用base-font(bold) */
+	--heading-Chinese-font: 华文黑体;
+
+	/* 标题字体分别设置 */
+		/* 大标题（h1）字体 */
+		--title-Chinese-font: "华文黑体"; 
+		--title-font-size: 18pt;
+		/* h2字体 */
+		--h2-Chinese-font: 华文黑体; 
+		--h2-font-size: 14pt;
+		/* h3字体 */
+		--h3-Chinese-font: "华文黑体";
+		--h3-font-size: 12pt;
+		/* h4字体 */
+		--h4-Chinese-font: 华文楷体;
+		--h4-font-size: 10pt;
+		/* h5字体 */
+		--h5-Chinese-font: 华文仿宋;
+		--h5-font-size: 10pt;
+		/* h6字体 */
+		--h6-Chinese-font: 华文仿宋;
+		--h6-font-size: 9.5pt;
+
+	/* 粗体样式设置 */
+	--strong-weight: 900; /* 加粗风格时使用的字重；400等同于normal，700等同于bold，900等同于heavy */ 
+
+	/* 基础行距 */
+	--base-line-height: 16pt; 
+
+/* == 页面设置 == */
+	/* 打印页边距 */
+	--set-margin: 1.8cm 2cm 1.2cm 2cm !important;
+	/* 参阅 <https://github.com/Keldos-Li/typora-latex-theme/blob/main/README.md#特别注意> */
+
+/* == 控制设置 == */
+	/* 目录中是否显示一级标题 */
+	--toc-show-title: none; 
+}
+/* ============================================
+ * ============ TYPORA lATEX THEME ============
+ * ============================================
+ * THIS PROJECT IS BASED ON THE WORKS OF YFZHAO20 AND DU33169, 
+   WHOSE REPOSITORIES ARE ADRESSED ON 
+   <https://github.com/yfzhao20/Typora-markdown>
+   AND <https://github.com/du33169/typora-theme-essay_cn>,
+   MANY THANKS TO THEM.
+ * "TYPORA LATEX THEME" (MARKDOWN LATEX THEME)
+   IS A THEME FOR TYPORA (OR CSS FOR OTHER MARKDOWN EDITORS),
+   DESIGNED FOR CHINESE UNIVERSITY STUDENTS 
+   USED IN LATEX-STYLED ESSAYS OR EXPERIMENTAL REPORTS.
+ * COPYRIGHT (C) 2021 KELDOS; 
+   REPOSITORY ADDRESS: <https://github.com/Keldos-Li/typora-latex-theme>;
+   LISENCED UNDER GPL v3.0, SEE <https://github.com/Keldos-Li/typora-latex-theme/blob/main/LICENSE>
+ */
+
+/* LaTeX-light on Windows */
+
+@import "";
+
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: var(--base-line-height);
+    /*counter-reset: tableHead 0 imgHead 0;*/
+}
+
+/* 正文区基本属性 */
+#write {
+    font-family: var(--base-Latin-font), var(--base-Chinese-font), serif;
+    font-size: var(--base-font-size);
+    max-width: 21cm;/* A4标准宽度 */
+    background-color: white;
+    /* column-count: 2;
+    column-gap: 25px;
+    column-width: 8cm; 
+    display: inline-block; */
+    /* 这里可以试分栏的，但确实不适合实现 */
+}
+
+strong {
+    font-weight: var(--strong-weight);
+}
+
+@media screen {
+    #write {
+        padding: var(--set-margin);
+        /*border: 0.8px solid #AAC ; /* 添加一个淡蓝色的边框 */
+        box-shadow: 0 0 24px 12px #CCCCCC; /* 页边来一个阴影！！好耶 */
+    }
+}
+
+@media print {
+    #write {
+        padding: 0 !important;
+    }
+    #write a {
+        color: inherit;
+        text-decoration: none;
+    }
+    @page {
+        /* size: A4;  强制A4大小 */
+        margin: 1.8cm 2cm 1.2cm 2cm !important; /* 页边距在这里！！！！！！！！！！！！！！！！ */
+        /* 参阅 <https://github.com/Keldos-Li/typora-latex-theme/blob/main/README.md#特别注意> */
+    }
+}
+
+#write p {
+    text-align: left;
+}
+
+/*
+#write figure:after{
+  counter-increment: tableHead;
+  content: "表" counter(tableHead) " ";
+  text-align:center;
+  width:100%;
+  display:inline-block;
+}*/
+/* 图片，导出PDF时暂时无法显示 */
+/*
+#write .md-image:after{
+  counter-increment: imgHead;
+  content: "图" counter(imgHead) " ";
+  text-align:center;
+  width:100%;
+  display:inline-block;
+}
+*/
+
+/* basic样式采用一般的引言，具有左边框、左缩进 */
+blockquote {
+    font-style: normal;
+    font-family: var(--quote-font), var(--base-Latin-font), var(--base-Chinese-font), -apple-system, serif;
+    font-size: var(--quote-font-size);
+    border-left: 3px solid grey;
+    padding-left: 16px; /* 文字离左边框的距离 */
+    padding-right: 20pt;
+    margin-left: 20px; /* 左边框离页面边的距离 */
+    color: grey;
+}
+
+/*border-width: 0.5pt 0;
+  border-style:solid; 这一行本来使用了上下边框*/
+
+/* 标题属性 */
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+    font-weight: bold; /* 对 Windows 的修改 */
+    font-family: var(--heading-Latin-font), var(--heading-Chinese-font), sans-serif;
+    page-break-after: avoid !important;
+}
+
+#write h1 {
+    font-family: var(--heading-Latin-font), var(--title-Chinese-font), sans-serif;
+    /*font-weight: bold;*/
+    text-align: center;
+    column-span: all;
+    font-size: var(--title-font-size);
+}
+#write h2 {
+    font-family: var(--heading-Latin-font), var(--h2-Chinese-font), sans-serif;
+    font-size: var(--h2-font-size);
+}
+#write h3 {
+    font-family: var(--heading-Latin-font), var(--h3-Chinese-font), sans-serif;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-font-size);
+}
+#write h4 {
+    font-family: var(--heading-Latin-font), var(--h4-Chinese-font), sans-serif;
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-font-size);
+}
+#write h5 {
+    font-family: var(--heading-Latin-font), var(--h5-Chinese-font), sans-serif;
+    font-size: var(--h5-font-size);
+    line-height: var(--h5-font-size);
+}
+#write h6 {
+    font-family: var(--heading-Latin-font), var(--h6-Chinese-font), sans-serif;
+    font-size: var(--h6-font-size);
+    line-height: var(--h5-font-size); /* 没有写错，为了避免行距太小才这么写 */
+}
+
+
+/* 三线表 */
+#write table {
+    border-top: 1.2pt solid; /* 三线表第一条线宽度 */
+    border-bottom: 1.2pt solid; /* 三线表第二条线宽度 */
+    font-family: var(--table-font), var(--base-Latin-font), var(--base-Chinese-font), serif;
+    /* font-size: var(--base-font-size); */
+    text-align: center;
+    page-break-inside: avoid;
+    border-spacing: 6px;
+    width: auto; /* 自动布局表格宽度，如果有时内容太紧建议直接加空格吧，我自己看不惯和页面等宽的大表格 */
+    margin: 0 auto; /* 使表格默认居中；虽然这个代码不好，但好像没别的实现办法 */
+}
+
+#write table td {
+    padding: 2px;
+}
+
+#write table tr {
+    padding: 2px;
+}
+
+#write th {
+    padding: 0px 6px;
+}
+
+/* 表格标题（首行）样式 */
+#write thead {
+    border-bottom: 0.5pt solid; /* 三线表表头的线 */
+    font-family: var(--table-title-font), var(--heading-Latin-font), var(--heading-Chinese-font), serif !important;
+    /* font-size: var(--base-font-size); */
+    font-weight: var(--strong-weight);
+}
+
+hr {
+  border-top: solid 0.7px #EEE;
+}
+
+img {
+    page-break-inside: avoid; /* 避免图片在导出时被断开 */
+}
+
+/* ============ 多级列表样式 ============ */
+ul {
+    list-style: disc; /* 无序列表第一级：实心圆点 */
+}
+
+ul ul {
+    /*list-style: circle;*/
+    list-style: '–　 '; /* 直接用空格代替一部分缩进的调整了我真懒 */
+    /*left: -0.8em;*/
+}
+
+ul ul ul {
+    list-style: "◦　  "; /* 无序列表第三极：小圈 */
+    left: 0.6em;
+}
+
+ol {
+    list-style: decimal;
+    /* 有序列表第一级：数字 */
+}
+
+ol ol {
+    counter-reset: liist;
+    list-style: none;
+}
+ol ol li {
+    counter-increment: liist;
+    position: relative;
+}
+ol ol li::before {
+    content: "("counter(liist, lower-alpha) ")　　"; /* 有序列表第二级：括号加小写字母 */
+    position: absolute;
+    margin-right: 2rem;
+    left: -2.4em;
+}
+
+ol ol ol {
+    counter-reset: liiist;
+    list-style: none;
+    margin: 0;
+}
+ol ol ol li {
+    counter-increment: liiist;
+    position: relative;
+}
+ol ol ol li::before {
+    content: counter(liiist, lower-roman) ".　　　"; /* 有序列表第三级：小写罗马数字 这些后续还要改的可恶*/
+    align-self: flex-end;
+    position: absolute;
+    left: -2.4em;
+    /* -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;*/
+    width: 4em; /* 为了让项目编号是重新用句点对齐而不是左对齐我调试了一整个晚上啊啊啊啊 CSS好难写 */
+    text-align: right;
+}
+
+li {
+    position: relative;
+}
+/* ============ 多级列表样式END ============ */
+
+
+/* 行内代码 */
+p code,
+li code {
+    color: rgb(60, 112, 198);
+    background-color: #fefefe;
+    font-family: var(--code-font), var(--ui-font), monospace;
+    box-sizing: border-box;
+    border-right: 0px;
+    margin: 0 2px 0 2px;
+    padding: 0 2px 0 2px;
+    border-radius: 2px 2px 2px 2px; /* 圆角 */
+    box-shadow: 0 0 1px 1px #c8d3df; /* 阴影 */
+}
+
+/* 代码块样式*/
+#write .CodeMirror-wrap {
+    padding: 10px; /* 当代码太长跨页的时候好像也会有点问题，到时候再改 */
+}
+
+#write .CodeMirror-code pre {
+    font-family: var(--code-font), var(--ui-font), monospace;
+}
+
+/* typora 编写模式 */
+#typora-source {
+    font-family: var(--sourceMode-font), var(--code-font), var(--ui-font), monospace;
+    line-height: 2rem;
+}
+
+/* 下面是标题自动编号，初始化计数器。使用多级编号，编号后加空格模仿LaTeX */
+/* 首先全局进行一次reset，这样即使不添加h1标题也可以使用较低级别的标题 */
+#write {
+    counter-reset: h2 0 h3 0 h4 0 h5 0 h6 0
+}
+
+#write h1 {
+    counter-reset: h2
+}
+h2 {
+    counter-reset: h3
+}
+h3 {
+    counter-reset: h4
+}
+h4 {
+    counter-reset: h5
+}
+h5 {
+    counter-reset: h6
+}
+
+/* put counter result into headings */
+#write h2:before {
+    counter-increment: h2;
+    content: counter(h2);
+    margin-right: 2rem;
+}
+/** override the default style for focused headings */
+#write h3:before,
+h3.md-focus.md-heading:before {
+    counter-increment: h3;
+    content: counter(h2) "."counter(h3);
+    margin-right: 2rem;
+}
+#write h4:before,
+h4.md-focus.md-heading:before {
+    counter-increment: h4;
+    content: counter(h2) "."counter(h3) "."counter(h4);
+    margin-right: 2rem;
+}
+#write h5:before,
+h5.md-focus.md-heading:before {
+    counter-increment: h5;
+    content: counter(h2) "."counter(h3) "."counter(h4) "."counter(h5);
+    margin-right: 2rem;
+}
+#write h6:before,
+h6.md-focus.md-heading:before {
+    counter-increment: h6;
+    content: counter(h2) "."counter(h3) "."counter(h4) "."counter(h5) "."counter(h6);
+    margin-right: 2rem;
+}
+
+/* 目录 */
+.md-toc-content {
+    margin-left: 2em;
+    counter-reset: toc-h2 toc-h3 toc-h4; /* 修复缺失上级标题时无法递增 */
+    page-break-after: always;
+}
+.md-toc-inner {
+    margin-left: 0 !important;
+    color: black !important;
+}
+.md-toc-item {
+    color: black !important;
+}
+
+/* 目录标题内容属性 */
+.md-toc-h2,
+.md-toc-h3,
+.md-toc-h4,
+.md-toc-h5,
+.md-toc-h6 {
+    font-size: var(--toc-font-size);
+    font-family: var(--toc-font), var(--base-Latin-font), var(--base-Chinese-font), serif;
+}
+.md-toc-h2 {
+    font-weight: var(--strong-weight);
+}
+
+/* 目录标题前 */
+.md-toc-content .md-toc-h1 {
+    display: var(--toc-show-title);
+    counter-reset: toc-h2;
+}
+.md-toc-content .md-toc-h2 {
+    counter-reset: toc-h3;
+}
+.md-toc-content .md-toc-h3 {
+    counter-reset: toc-h4;
+}
+.md-toc-content .md-toc-h4 {
+    counter-reset: toc-h5;
+}
+.md-toc-content .md-toc-h5 {
+    counter-reset: toc-h6;
+}
+.md-toc-content .md-toc-h2:before {
+    counter-increment: toc-h2;
+    content: counter(toc-h2);
+    margin-right: 1rem;
+    font-weight: var(--strong-weight);
+}
+.md-toc-content .md-toc-h3:before {
+    counter-increment: toc-h3;
+    content: counter(toc-h2) "."counter(toc-h3);
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+}
+.md-toc-content .md-toc-h4:before {
+    counter-increment: toc-h4;
+    content: counter(toc-h2) "."counter(toc-h3) "."counter(toc-h4);
+    margin-left: 3.5rem;
+    margin-right: 0.5rem;
+}
+.md-toc-content .md-toc-h5:before {
+    counter-increment: toc-h5;
+    content: counter(toc-h2) "."counter(toc-h3) "."counter(toc-h4) "."counter(toc-h5);
+    margin-left: 5.5rem;
+    margin-right: 0.5rem;
+}
+.md-toc-content .md-toc-h6:before {
+    counter-increment: toc-h6;
+    content: counter(toc-h2) "."counter(toc-h3) "."counter(toc-h4) "."counter(toc-h5) "."counter(toc-h6);
+    margin-left: 7.5rem;
+    margin-right: 0.5rem;
+}
+
+/* 侧边大纲标题 */
+.sidebar-content .outline-h1 {
+    counter-reset: outline-h2;
+}
+.sidebar-content .outline-h2 {
+    counter-reset: outline-h3;
+}
+.sidebar-content .outline-h3 {
+    counter-reset: outline-h4;
+}
+.sidebar-content .outline-h4 {
+    counter-reset: outline-h5;
+}
+.sidebar-content .outline-h5 {
+    counter-reset: outline-h6;
+}
+.sidebar-content .outline-h2 .outline-label:before {
+    counter-increment: outline-h2;
+    content: counter(outline-h2) " ";
+}
+.sidebar-content .outline-h3 .outline-label:before {
+    counter-increment: outline-h3;
+    content: counter(outline-h2) "."counter(outline-h3) "  ";
+}
+.sidebar-content .outline-h4 .outline-label:before {
+    counter-increment: outline-h4;
+    content: counter(outline-h2) "."counter(outline-h3) "."counter(outline-h4) "  ";
+}
+.sidebar-content .outline-h5 .outline-label:before {
+    counter-increment: outline-h5;
+    content: counter(outline-h2) "."counter(outline-h3) "."counter(outline-h4) "."counter(outline-h5) "  ";
+}
+
+.sidebar-content {
+    font-family: var(--ui-font); /* 侧边栏的字体修改 */
+    list-style: none;
+}
+
+/* 元数据（如YAML front matter）的背景框 */
+pre.md-meta-block {
+    background: #CCCCCC;
+    padding: 1.4em;
+    font-family: var(--code-font), var(--ui-font), monospace;
+}
+
+/** override the default style for focused headings */
+#write>h3.md-focus:before,
+#write>h4.md-focus:before,
+#write>h5.md-focus:before,
+#write>h6.md-focus:before,
+h3.md-focus:before,
+h4.md-focus:before,
+h5.md-focus:before,
+h6.md-focus:before {
+    color: inherit;
+    border: inherit;
+    border-radius: inherit;
+    position: inherit;
+    left: initial;
+    float: none;
+    top: initial;
+    font-size: inherit;
+    padding-left: inherit;
+    padding-right: inherit;
+    vertical-align: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+
+</style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write'  class=' first-line-indent'><h1><a name="openstack" class="md-header-anchor"></a><code>OpenStack</code></h1><h2><a name="概论" class="md-header-anchor"></a><span>概论</span></h2><h3><a name="定义" class="md-header-anchor"></a><span>定义</span></h3><p><code>OpenStack</code><span>是开源云计算平台，可控制整个数据中心的大型计算，存储和网络资源池。</span></p><p><span>用户能够通过Web界面、命令行或API接口配置资源。</span></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010080049370.png" referrerpolicy="no-referrer" alt="image-20211010080049370"></p><blockquote><p><span>这张图下面的英文原文就是第一第二句话的英文版……</span></p></blockquote><h3><a name="特性" class="md-header-anchor"></a><span>特性</span></h3><ul><li><span>自身不提供虚拟化技术；</span></li><li><span>调用多种技术实现多资源池管理；</span></li><li><span>对外提供统一管理接口；</span></li><li><span>环境隔离，资源复用；</span></li><li><span>降低隔离损耗，提升运行效率；</span></li><li><span>提供高级虚拟化特性；</span></li></ul><p><span>定位：云计算操作系统：云计算的</span><mark><span>控制面</span></mark></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010080215829.png" referrerpolicy="no-referrer" alt="image-20211010080215829"></p><ul><li><span>OSS: Operations Support System；</span></li><li><span>BSS: Business Support System；</span></li></ul><h3><a name="小结" class="md-header-anchor"></a><span>小结</span></h3><p><code>OpenStack</code><span>既是一个社区，也是一个项目和一个开源软件，提供了一个部署云的操作平台或工具集。用</span><code>OpenStack</code><span>易于构建虚拟计算或存储服务的云，既可以为公有云、私有云，也可以为大云、小云提供可扩展、灵活的云计算。</span></p><p><code>OpenStack</code><span>是一个管理</span><mark><span>计算</span></mark><span> - 如</span><code>Nova</code><span>、</span><mark><span>存储</span></mark><span> - 如</span><code>Swift</code><span>、 和</span><mark><span>网络</span></mark><span> - 如</span><code>Neutron</code><span>资源的数据中心云计算开放平台，通过一个仪表板，为管理员提供了所有的管理控制，同时通过Web界面为其用户提供资源。</span></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010080731853.png" referrerpolicy="no-referrer" alt="image-20211010080731853"></p><h2><a name="架构概述" class="md-header-anchor"></a><span>架构概述</span></h2><h3><a name="组件简介" class="md-header-anchor"></a><span>组件简介</span></h3><h4><a name="最初核心" class="md-header-anchor"></a><span>最初核心</span></h4><ul><li><code>Nova</code><span>：管理虚拟机</span></li><li><code>Swift</code><span>：用标准的硬件进行PB级的安全、可靠的</span><mark><span>对象存储</span></mark></li><li><code>Glance</code><span>：管理镜像</span></li></ul><h4><a name="其他组件" class="md-header-anchor"></a><span>其他组件</span></h4><ul><li><code>Keystone</code><span>：认证管理服务，用户或服务的验证或授权</span></li><li><code>Cinder</code><span>：块存储服务</span></li><li><code>Manila</code><span>：文件共享存储服务</span></li><li><code>Neutron</code><span>：网络服务，提供网络即服务的功能</span></li><li><code>Telemetry</code><span>：计量服务，计量租户资源使用率</span></li><li><code>Heat</code><span>：编排服务，面向</span><code>OpenStack</code><span>开发者</span></li><li><code>Horizon</code><span>：仪表盘服务，无状态无数据的web应用</span></li><li><span>消息队列：中心化的消息交换器</span></li><li><span>数据库：构建时和运行时状态信息</span></li></ul><p>&nbsp;</p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010084947432.png" referrerpolicy="no-referrer" alt="image-20211010084947432"></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010093418210.png" referrerpolicy="no-referrer" alt="image-20211010093418210"></p><figure><table><thead><tr><th><strong><span>功能类别</span></strong></th><th><strong><span>角色</span></strong></th><th>&nbsp;</th></tr></thead><tbody><tr><td><span>计算</span></td><td><span>存储虚拟机镜像</span></td><td><span>提供用户接口</span></td></tr><tr><td><span>镜像</span></td><td><span>存储磁盘文件</span></td><td><span>提供用户接口</span></td></tr><tr><td><span>对象存储</span></td><td><span>存储对象</span></td><td><span>提供用户接口</span></td></tr><tr><td><span>块存储</span></td><td><span>提供卷</span></td><td><span>提供用户接口</span></td></tr><tr><td><span>网络</span></td><td><span>提供网络连接</span></td><td><span>提供用户接口</span></td></tr><tr><td><span>计量</span></td><td><span>提供度量、指标和报警</span></td><td><span>提供用户接口</span></td></tr><tr><td><span>文件共享</span></td><td><span>提供横向扩展的文件共享系统</span></td><td><span>提供用户接口</span></td></tr><tr><td><span>编排</span></td><td><span>为堆栈创建提供编排引擎</span></td><td><span>提供用户接口</span></td></tr><tr><td><span>身份认证</span></td><td><span>提供认证</span></td><td>&nbsp;</td></tr><tr><td><span>仪表盘</span></td><td><span>提供图形化用户界面</span></td><td>&nbsp;</td></tr></tbody></table></figure><h4><a name="文件存储对象存储与块存储" class="md-header-anchor"></a><span>文件存储、对象存储与块存储</span></h4><blockquote><p><span>参考资料：</span><a href='https://www.redhat.com/zh/topics/data-storage/file-block-object-storage' target='_blank' class='url'>https://www.redhat.com/zh/topics/data-storage/file-block-object-storage</a></p></blockquote><h5><a name="文件存储" class="md-header-anchor"></a><span>文件存储</span></h5><p><span>以文件和文件夹的</span><mark><span>层次结构</span></mark><span>来整理和呈现数据。</span></p><ul><li><span>路径查找，简明快捷</span></li><li><span>纵向拓展困难（得添置更多系统搞横向）</span></li></ul><h5><a name="块存储" class="md-header-anchor"></a><span>块存储</span></h5><p><span>会将数据拆分到任意划分且大小相同的</span><mark><span>卷</span></mark><span>中。</span></p><ul><li><span>适合大量数据情形，灵活</span></li><li><span>将数据与用户环境分离</span></li><li><span>块存储的成本高昂</span></li><li><span>处理元数据的能力有限；这意味着，它需要在应用或数据库级别进行处理</span></li></ul><h5><a name="对象存储" class="md-header-anchor"></a><span>对象存储</span></h5><p><span>会管理数据并</span><mark><span>将其链接至关联的元数据</span></mark><span>。</span></p><ul><li><span>对象存储经济高效，您只需为已用的内容付费</span></li><li><span>轻松扩展，因而是公共云存储的理想之选。</span></li><li><span>非常适用于静态数据的存储</span></li><li><span>灵活性和扁平性</span></li><li><span>擅长存储非结构化数据</span></li><li><span>无法修改对象 — 您必须一次性完整地写入对象</span></li><li><span>对象存储也不能很好地与传统数据库搭配使用</span></li></ul><h3><a name="虚拟机的创建" class="md-header-anchor"></a><span>虚拟机的创建</span></h3><h4><a name="资源准备" class="md-header-anchor"></a><span>资源准备</span></h4><ul><li><span>通过</span><code>Keystone</code><span>进行用户身份认证，通过认证后，用户即可与</span><code>OpenStack</code><span> API节点通信，触发创建请求；</span></li><li><span>通过调度器获得启动虚拟机的最佳位置：通过工作守护进程获得物理节点上的资源状态；</span><code>`Nova</code><span>-scheduler`；</span></li></ul><h4><a name="创建流程" class="md-header-anchor"></a><span>创建流程</span></h4><ul><li><span>调用身份认证进行身份验证</span></li><li><span>生成用于后续调用的令牌</span></li><li><span>访问镜像服务以获取镜像列表，并获取目标基础镜像</span></li><li><span>处理计算服务API请求</span></li><li><span>处理计算服务对安全组和密钥调用的请求</span></li><li><span>调用网络服务API确定可用网络</span></li><li><span>通过计算节点调度程序选择</span><code>Hypervisor</code><span>节点</span></li><li><span>调用块存储服务API为实例分配卷</span></li><li><span>通过计算服务API调用再</span><code>Hypervisor</code><span>节点启动实例</span></li><li><span>调用网络服务API为实例分配网络资源</span></li></ul><p><span>传统上这些流程基本都要和</span><code>Keystone</code><span>交互以鉴权，这些令牌生成与验证的过程带来性能问题，所以要采用加密身份验证方法（公钥-私钥，类似HTTPS）来减轻</span><code>Keystone</code><span>的压力。</span></p><h3><a name="架构设计" class="md-header-anchor"></a><span>架构设计</span></h3><h4><a name="四种节点" class="md-header-anchor"></a><span>四种节点</span></h4><p><span>控制、网络、计算、存储</span></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010092953676.png" referrerpolicy="no-referrer" alt="image-20211010092953676"></p><h4><a name="逻辑模型设计" class="md-header-anchor"></a><span>逻辑模型设计</span></h4><p><span>控制节点中封装了大量的</span><code>OpenStack</code><span>的服务</span></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010090137952.png" referrerpolicy="no-referrer" alt="image-20211010090137952"></p><h4><a name="存储设计" class="md-header-anchor"></a><span>存储设计</span></h4><p><span>有哪些数据需要存储？虚拟机快照备份的存储要求是什么？需要文件共享系统吗？是否需要虚拟机之间实现存储共享？</span></p><h4><a name="网络设计" class="md-header-anchor"></a><span>网络设计</span></h4><p><span>网络服务是</span><code>OpenStack</code><span>服务中最复杂的。</span></p><ul><li><span>使用隔离的物理网络处理不同类型的网络流量</span></li><li><span>租户数据网络：为租户创建的虚拟网络提供物理路径</span></li><li><span>管理和API网络：</span><code>OpenStack</code><span>服务之间的通信，可细分</span></li><li><span>存储网络：虚拟机和存储节点之间的物理连接</span></li></ul><h5><a name="虚拟网络类型" class="md-header-anchor"></a><span>虚拟网络类型</span></h5><ul><li><span>外部网络：全局互联并使用可路由的IP寻址；</span><code>SNAT</code><span>虚拟机访问外网；</span><code>DNAT</code><span>外网访问虚拟机</span></li><li><span>租户网络：虚拟机之间专用网络；私有IP空间；租户流量隔离</span></li></ul><h4><a name="估算" class="md-header-anchor"></a><span>估算</span></h4><h5><a name="cpu评估" class="md-header-anchor"></a><span>CPU评估</span></h5><p><span>逻辑CPU数：物理CPU</span><em><span>核数</span></em><span>超线程数；一个逻辑CPU对应一个虚拟CPU；一个虚拟CPU支持多个虚拟机【影响性能；可以使用频数计算】；一个虚拟机可以使用多个虚拟CPU，但不能多于逻辑CPU数；</span></p><p><span>可以超额分配，但是不能超额执行；超分：</span><strong><span>单台物理机中虚拟机个数＊频数&gt;物理频数</span></strong></p><h5><a name="内存评估" class="md-header-anchor"></a><span>内存评估</span></h5><p><span>单台物理机虚拟机个数*虚拟机最大动态分配内存+主机内存用量</span></p><h5><a name="网络评估" class="md-header-anchor"></a><span>网络评估</span></h5><p><span>网卡带宽&gt;单个虚拟机带宽*虚拟机个数；公共IP地址个数；浮动IP地址个数</span></p><h5><a name="存储评估" class="md-header-anchor"></a><span>存储评估</span></h5><p><span>虚拟机的临时存储+永久存储；存储节点的对象存储、块存储和文件共享存储</span></p><h5><a name="最佳实践" class="md-header-anchor"></a><span>最佳实践</span></h5><p><span>分析需求、考虑需求增长情况、持续跟踪每一个服务单元、丢弃和替换服务单元；按需调整</span></p><h4><a name="一个示例" class="md-header-anchor"></a><span>一个示例</span></h4><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010090446149.png" referrerpolicy="no-referrer" alt="image-20211010090446149"></p><ul><li><p><span>五种节点：部署各个系统的不同组件</span></p><p><span>除了控制、计算、存储、网络，图中还多了个</span><code>Util</code><span>，这里一般是数据库等通用组件。可以看到</span><code>Util</code><span>不仅走公网与控制和网络节点相连，还走内网和所有其他四种类型的网络相连。</span></p><p><span>不难发现计算节点连外网是通过虚拟机流量网络先到网络节点再出去的。</span></p></li><li><p><span>三层网络：不同的使用目的；</span><code>OpenStack</code><span>内部网络、外部网络、虚机网络</span></p></li></ul><h2><a name="部署" class="md-header-anchor"></a><span>部署</span></h2><h3><a name="devops" class="md-header-anchor"></a><span>+DevOps</span></h3><p><span>让研发（Development）和运维（Operations）一体化，让团队从业务需求出发，向着同一个目标前进。</span></p><p><span>DevOps（Development和Operations的组合）是一组过程、方法与系统的统称，用于促进开发（应用程序/软件工程）、技术运营和质量保障（QA）部门之间的沟通、协作与整合。</span></p><ul><li><span>简化和模块化</span><code>OpenStack</code><span>服务；像开发构建模块一样开发</span><code>OpenStack</code><span>服务</span></li><li><span>在不影响整个系统的情况下，促进服务的定制和改进</span></li><li><span>使用正确的工具来构建服务，确保服务在相同输入情况下输出相同结果</span></li><li><span>将服务愿景从如何做切换到要做什么</span></li></ul><h3><a name="工具" class="md-header-anchor"></a><span>工具</span></h3><p><strong><span>Ansible</span></strong><span>：物理环一定程度上的自动化部署</span></p><blockquote><p><span>环境构建、开发机初始化、安装Git、执行引导程序仍需要手动完成</span></p></blockquote><h2><a name="节点详解控制节点" class="md-header-anchor"></a><span>节点详解：控制节点</span></h2><h3><a name="集群提供高可用性" class="md-header-anchor"></a><span>集群：提供高可用性</span></h3><p><span>两台或多台服务器的能力聚合就是服务器集群，通过堆积机器即可实现这种聚合</span></p><ul><li><span>向上扩展（垂直扩展）：向服务器添加更多的CPU和内存</span></li><li><span>向下扩展（水平扩展）：增加更多的标准商用服务器</span></li></ul><h3><a name="非对称集群" class="md-header-anchor"></a><span>非对称集群</span></h3><p><span>备服务器只有在主服务器发生故障时才接管系统，处于高可用目的，包含故障切换配置</span></p><h3><a name="对称集群" class="md-header-anchor"></a><span>对称集群</span></h3><p><span>所有节点都是活动的，共享工作负载，可视为负载均衡集群</span></p><p><code>OpenStack</code><span>的功能被广泛分布到多个服务中，包含了基础架构服务和</span><code>OpenStack</code><span>服务</span></p><h3><a name="基础架构服务" class="md-header-anchor"></a><span>基础架构服务</span></h3><p><span>不属于</span><code>OpenStack</code><span>对外提供的公共服务，但被多个</span><code>OpenStack</code><span>组件使用。</span></p><h4><a name="消息队列" class="md-header-anchor"></a><span>消息队列</span></h4><p><span>必须是集群式的；RabbitMQ，ZeroMQ，Qpid</span></p><h4><a name="整合数据库" class="md-header-anchor"></a><span>整合数据库</span></h4><p><code>OpenStack</code><span>的环境数据，使用数据等；MySQL和MongoDB</span></p><h3><a name="openstack服务" class="md-header-anchor"></a><code>OpenStack</code><span>服务</span></h3><p><span>身份、镜像、计算、网络、存储等</span></p><h3><a name="keystone认证服务" class="md-header-anchor"></a><code>Keystone</code><span>：认证服务</span></h3><p><span>身份认证和服务目录（所有其他服务需向</span><code>Keystone</code><span>注册API端点）</span></p><p><span>由多个</span><code>Provider</code><span>组成。</span></p><ul><li><span>身份提供者Identity </span><code>Provider</code><span>：服务用户、管理员用户、终端用户</span></li><li><span>资源提供者resource </span><code>Provider</code><span>： project、domain</span></li><li><span>认证提供者Authorization </span><code>Provider</code><span>：用户和用户组和他们角色之间的关系</span></li><li><span>令牌提供者Token </span><code>Provider</code><span>：访问</span><code>OpenStack</code><span>服务需要一个有效的令牌，通过身份提供者的认证后获得令牌</span></li><li><span>目录提供者Catalog </span><code>Provider</code><span>：维护服务和API端点的目录</span></li><li><span>策略提供者Policy </span><code>Provider</code><span>：策略由多条规则组成，每条规则定义了哪些用户和角色被允许访问哪些资源</span></li></ul><h3><a name="nova管理组件及api" class="md-header-anchor"></a><code>Nova</code><mark><span>管理组件及API</span></mark></h3><h4><a name="权责范围" class="md-header-anchor"></a><span>权责范围</span></h4><h5><a name="负责" class="md-header-anchor"></a><span>负责</span></h5><ul><li><span>虚拟机生命周期管理</span></li><li><span>其他计算资源的生命周期管理</span></li></ul><h5><a name="不负责" class="md-header-anchor"></a><span>不负责</span></h5><ul><li><span>承载虚拟机的物理机自身的管理</span></li><li><span>全面的系统状态监控</span></li></ul><h4><a name="运行在云控制器上的组件" class="md-header-anchor"></a><span>运行在云控制器上的组件</span></h4><h5><a name="nova-api" class="md-header-anchor"></a><code>Nova-api</code></h5><p><span>云控制器中的编排引擎；通过API将消息写入数据库和消息队列向其他守护进程传递消息。</span></p><h5><a name="nova-conductor" class="md-header-anchor"></a><code>Nova-conductor</code></h5><p><span>代表计算节点上</span><code>Nova</code><span>-compute执行数据库操作，提供数据库访问隔离；将来自计算节点请求并行化。</span></p><h5><a name="nova-scheduler" class="md-header-anchor"></a><code>Nova-scheduler</code></h5><p><span>专门的调度算法；确定虚拟机创建的最佳放置位置；支持过滤器检查计算节点上资源可用性，通过加权机制过滤出计算节点列表，再确定启动虚拟机的最佳位置；支持自定义度量标准和策略考量配置。</span></p><p><span>在生产环境下，配置单独的存储主机，其调度器运行在存储主机上。</span></p><h5><a name="nova-compute运行在计算节点上" class="md-header-anchor"></a><mark><code>Nova</code><span>-compute运行在计算节点上</span></mark></h5><h5><a name="nova-network" class="md-header-anchor"></a><code>Nova-network</code></h5><p><span>则可以被</span><code>Neutron</code><span>替代，网络API驻留在云控制器中，独立配置网络服务器节点。</span></p><h5><a name="glance" class="md-header-anchor"></a><code>Glance</code></h5><p><mark><span>镜像管理</span></mark></p><ul><li><code>Glance</code><span> API提供外部REST接口，用于查询虚拟机镜像及相关元数据</span></li><li><code>Glance</code><span> registry将镜像元数据存储在数据库中，并</span><mark><span>利用存储后端实际存储镜像</span></mark></li><li><span>例如使用</span><code>Swift</code><span>对象存储作为镜像存储后端</span></li></ul><h5><a name="仪表盘服务" class="md-header-anchor"></a><span>仪表盘服务</span></h5><p><span>运行在Apache Web服务器后端，可以将其运行在可以访问API端点的单独节点上，降低云控制器负载。</span></p><h5><a name="计量服务" class="md-header-anchor"></a><span>计量服务</span></h5><p><span>跟踪资源使用情况，计算资源利用率。</span></p><p><span>多种使用目的：计费、容量规划、按需求和吞吐量的虚拟基础架构自动扩展等。</span></p><h4><a name="api服务" class="md-header-anchor"></a><span>API服务</span></h4><p><span>类似</span><code>Nova-api</code><span>，也将身份、镜像、网络和存储API都放在云控制器上运行</span></p><h4><a name="特征" class="md-header-anchor"></a><span>特征</span></h4><ul><li><span>无中心结构</span></li><li><span>节点无本地状态</span></li><li><span>多控制器：请求聚合+负载均衡</span></li><li><span>水平可扩展：控制节点、计算节点</span></li></ul><figure><table><thead><tr><th>&nbsp;</th><th>&nbsp;</th></tr></thead><tbody><tr><td><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010094715897.png" referrerpolicy="no-referrer" alt="image-20211010094715897"></td><td><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010094723895.png" referrerpolicy="no-referrer" alt="image-20211010094723895"></td></tr></tbody></table></figure><h2><a name="节点详解计算节点" class="md-header-anchor"></a><span>节点详解：计算节点</span></h2><h3><a name="hypervisor" class="md-header-anchor"></a><code>Hypervisor</code></h3><p><span>计算节点运行</span><mark><code>Nova</code><span>-compute</span></mark><span>服务，负责启动和终止虚拟机，通过</span><mark><span>消息总线</span></mark><span>监听虚拟机相关请求。</span></p><p><code>OpenStack</code><span>中虚拟机管理程序能够支持各种VMM以及Docker。</span></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095423614.png" referrerpolicy="no-referrer" alt="image-20211010095423614"></p><h4><a name="nova-docker" class="md-header-anchor"></a><code>Nova Docker</code></h4><p><span>类似虚拟机实例启动和管理容器生命周期，然而一个应用或服务往往需要容器组构建。</span></p><h3><a name="magnum" class="md-header-anchor"></a><span>Magnum</span></h3><ul><li><p><span>使用容器编排引擎(COE)管理连接着的容器组</span></p></li><li><p><span>COE节点部署为</span><code>Nova</code><span>实例</span></p></li><li><p><span>Bay是一组运行COE软件的节点，表示一个容器集群</span></p><p><span>Pod是COE最基本的部署调度单元，逻辑上对应一个服务实例，运行一组容器，必须有一个作为网络路由</span></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095507147.png" referrerpolicy="no-referrer" alt="image-20211010095507147"></p></li></ul><h3><a name="相关概念" class="md-header-anchor"></a><span>相关概念</span></h3><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095535677.png" referrerpolicy="no-referrer" alt="image-20211010095535677"></p><p><code>Region</code><span>：地理区域</span></p><p><code>Availability Zone</code><span>：对某个地理区域的用户而言的可用区域</span></p><p><code>Host Aggregate</code><span>：按照类型将物理主机放到一起组成区域</span></p><p><code>Host</code><span>：具体的物理主机</span></p><blockquote><p><span>各大公有云一般是同地理区域内都是内网直通的。</span></p></blockquote><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095658676.png" referrerpolicy="no-referrer" alt="image-20211010095658676"></p><blockquote><p><span>除了HA和Service，其他概念其实都挺好找的。</span></p></blockquote><h3><a name="nova单元" class="md-header-anchor"></a><code>Nova</code><span>单元</span></h3><p><span>按照计算节点为最小单位的管理视角——</span><code>Nova</code><span>单元。</span></p><p><span>所有计算节点都需要与消息总线和数据库服务器通信，随着计算节点增多，使得消息队列和数据库过载，因此产生</span><code>Nova</code><span>计算单元。</span></p><ul><li><span>由多个计算节点组成一个单元</span></li><li><span>API单元：作为树根，使用基于消息队列的RPC调用和计算节点交互</span></li><li><span>计算单元：每个单元有自己的消息队列和数据库</span></li></ul><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095854690.png" referrerpolicy="no-referrer" alt="image-20211010095854690"></p><h2><a name="节点详解存储节点" class="md-header-anchor"></a><span>节点详解：存储节点</span></h2><h3><a name="cinder" class="md-header-anchor"></a><code>Cinder</code></h3><p><span>为云平台提供统一接口，按需分配的，持久化的</span><mark><span>块存储</span></mark><span>服务。</span></p><p><span>核心功能是对卷的管理，允许对</span><mark><span>卷</span></mark><span>、卷的类型、卷的快照、卷备份进行操作</span></p><p><span>为后端不同的存储设备提供了统一的接口，不同的块设备服务厂商在</span><code>Cinder</code><span>中实现其驱动支持以与</span><code>OpenStack</code><span>进行整合。</span></p><p><img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010100114078.png" referrerpolicy="no-referrer" alt="image-20211010100114078"></p><h2><a name="节点详解网络节点" class="md-header-anchor"></a><span>节点详解：网络节点</span></h2><p><span>使得运营商能够构建和管理具有所有必要元素的完整网络拓扑。</span></p><p><span>提供网络、子网、路由器、负载均衡器、防火墙和端口。</span></p><p><mark><span>API服务器</span></mark><span>运行在</span><mark><span>云控制器</span></mark><span>上。</span></p><h3><a name="基于插件的架构" class="md-header-anchor"></a><span>基于插件的架构</span></h3><ul><li><p><span>API服务将请求转发到特定插件，插件通过代理和设备交互或者控制资源</span></p></li><li><p><span>提供了基于开源技术的插件和代理参考实现</span></p></li><li><p><span>网络节点提供资源实现网络服务：路由、防火墙、负载均衡器和VPN</span></p></li><li><p><span>核心插件：创建和管理网络、端口和子网</span></p></li><li><p><span>服务插件：实现高阶网络服务，路由、防火墙等</span></p></li><li><p><span>代理：部署在计算和网络节点上，通过消息总线上的RPC和服务器交互</span></p></li><li><ul><li><span>L2代理：运行在计算和网络基点上，将虚拟机和网络设备连接到二层网络上</span></li><li><span>DHCP代理、L3代理和VPN代理</span></li></ul><p><span>比如说基于VLAN或其他隧道。</span></p></li></ul><h2><a name="拓展" class="md-header-anchor"></a><span>拓展</span></h2><ul><li><code>OpenStack</code><span>的高可用和容错机制；</span></li><li><code>OpenStack</code><span>集群监控和故障排查；</span></li><li><code>OpenStack</code><span> ELK日志处理系统；</span></li><li><code>OpenStack</code><span>基准测试和性能调优；</span></li></ul></div>
+</body>
+</html>

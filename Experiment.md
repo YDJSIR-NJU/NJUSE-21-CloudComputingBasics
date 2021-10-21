@@ -10,4 +10,6 @@
 
 ## Spark部署实战
 
-==TODO==
+https://ydjsir.com.cn/2021/10/17/initSpark/
+
+后期老师会说你可以自行研究用集群跑自己写的应用，但是似乎不计分。
