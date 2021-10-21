@@ -174,8 +174,6 @@ Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大�
 
 传统解压包（繁琐易错）和标准Linux部署方式（简单易用）
 
-> 这里会有一个专门的作业，
-
 ![image-20211015095217686](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211015095217686.png)
 
 > 注意下面均以Hadoop 2.0为基础
@@ -612,7 +610,6 @@ RDD是高度受限的共享内存模型。
 
 ![image-20211015213320153](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211015213320153.png)
 
-![image-20211015205800617](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211015205800617.png)
 
 构造DAG，划分`Job`、`Stage`、`Task`，==遇到`Action`，才会提交`Job`==。
 
@@ -877,7 +874,7 @@ RDD是高度受限的共享内存模型。
 
 ##### 例：按照`name`（第一标准）和`time`（第二标准）对`value`排序
 
-![image-20211021093117197](SparkWithHadoop.assets/image-20211021093117197.png)
+![image-20211021093117197](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021093117197.png)
 
 归约只能做到按照`name`把值区分开，但是分好后再对`value`按照`time`排序时，需要进行二次排序。
 
@@ -904,7 +901,7 @@ RDD是高度受限的共享内存模型。
 
 ##### 方案2.2：使用组合键 + `groupByKey()`
 
-![image-20211021094415780](SparkWithHadoop.assets/image-20211021094415780.png)
+![image-20211021094415780](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021094415780.png)
 
 #### `TOP N`列表
 
@@ -946,11 +943,11 @@ Spark SQL是`Spark Core`上的一个模块，所有`SQL`操作被`Catalyst`翻�
 - 使用核心数据结构-树-存储`SQL`语句；
 - 使用基础概念-规则-对`SQL`语句对应的计算进行优化；
 
-![image-20211021100418147](SparkWithHadoop.assets/image-20211021100418147.png)
+![image-20211021100418147](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021100418147.png)
 
 | 实际用例                                                     | Catalyst                                                     |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20211021100100958](SparkWithHadoop.assets/image-20211021100100958.png) | ![image-20211021100111405](SparkWithHadoop.assets/image-20211021100111405.png) |
+| ![image-20211021100100958](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021100100958.png) | ![image-20211021100111405](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021100111405.png) |
 
 #### 使用途径
 
@@ -980,7 +977,7 @@ Spark SQL是`Spark Core`上的一个模块，所有`SQL`操作被`Catalyst`翻�
 
 在动态变化的数据集上实现流式计算就像在静态数据集上做计算一样方便。
 
-![image-20211021101018873](SparkWithHadoop.assets/image-20211021101018873.png)
+![image-20211021101018873](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021101018873.png)
 
 #### 对`DataFrames/DataSets`进行多种操作
 
@@ -992,17 +989,17 @@ Spark SQL是`Spark Core`上的一个模块，所有`SQL`操作被`Catalyst`翻�
 
 ##### Window Operations on Event Time
 
-![image-20211021101455071](SparkWithHadoop.assets/image-20211021101455071.png)
+![image-20211021101455071](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021101455071.png)
 
 5分钟统计一次，10分钟是一个窗口。统计的不仅仅是从开始时间点到数据截止时的总出现次数，而是这10分钟的窗口期内出现的次数。
 
 ##### Handling Late Data and Watermarking
 
-![image-20211021101806557](SparkWithHadoop.assets/image-20211021101806557.png)
+![image-20211021101806557](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021101806557.png)
 
 迟一点不要紧，一样可以更新在表格里面。但是等待不是没有限度的，在那个`watermark`线以下的就直接`ignore`了。
 
-![image-20211021101912017](SparkWithHadoop.assets/image-20211021101912017.png)
+![image-20211021101912017](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021101912017.png)
 
 ###### 启动计算
 
@@ -1024,7 +1021,7 @@ Spark SQL是`Spark Core`上的一个模块，所有`SQL`操作被`Catalyst`翻�
 
 实现可扩展、高吞吐、高容错的实时数据流处理。
 
-![image-20211021102348551](SparkWithHadoop.assets/image-20211021102348551.png)
+![image-20211021102348551](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021102348551.png)
 
 ##### 部署条件
 
