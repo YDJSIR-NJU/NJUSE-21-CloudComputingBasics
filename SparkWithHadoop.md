@@ -1,4 +1,6 @@
-# Hadoop
+# `Spark with Hadoop`
+
+# `Hadoop`
 
 ## 概论
 
@@ -76,39 +78,39 @@
 
 ![image-20211015092905250](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211015092905250.png)
 
-> 经过洗牌之后，合并的时候分布的文本某一个特定单词的计数都送到某一个节点上进行合并，不同单词之间的合并技术可以并行
+> 经过洗牌之后，合并的时候分布的文本某一个特定单词的计数都送到某一个节点上进行合并，不同单词之间的合并技术可以并行。
 
 ### Hadoop简介
 
 #### 渊源
 
-- Apache成立开源搜索引擎项目`Nutch`——但开发过程中无法有效地将计算任务分配到多台机器上
+- `Apache`成立开源搜索引擎项目`Nutch`——但开发过程中无法有效地将计算任务分配到多台机器上
 
-- 前后Google陆续发表`GFS`、`MapReduce`、`BigTable`（谷歌三板斧）
+- 前后`Google`陆续发表`GFS`、`MapReduce`、`BigTable`（谷歌三板斧）
 
-- Apache借鉴GFS和MapReduce，实现了自己的`NDFS`和`MapReduce`
+- `Apache`借鉴`GFS`和`MapReduce`，实现了自己的`NDFS`和`MapReduce`
 
 - 发现`Nutch`侧重搜索，而`NDFS`和`MapReduce`偏向通用基础架构，将`NDFS`和`MapReduce`移出`Nutch`，成为独立开发项目，称为`Hadoop`
 
-Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大。
+`Hadoop 1.0` （1.X的统称）和 `Hadoop 2.0` （2.X的统称）架构差异较大。
 
 #### 简介
 
-> 可看作是Google Cloud的开源版本；但并不拘泥于复现Google Cloud的相关产品。
+> 可看作是`Google Cloud`的开源版本；但并不拘泥于复现`Google Cloud`的相关产品。
 >
-> | **Hadoop**        | Google            | 描述           |
-> | ----------------- | ----------------- | -------------- |
-> | Hadoop  HDFS      | Google  GFS       | 分布式文件系统 |
-> | Hadoop  MapReduce | Google  MapReduce | 分布式计算     |
-> | HBase             | Google  BigTable  | 分布式数据库   |
-> | ZooKeeper         | Google Chubby     | 消息队列       |
-> | Pig               | Google  Sawzall   | 脚本语言       |
+> | **Hadoop**          | Google              | 描述           |
+> | ------------------- | ------------------- | -------------- |
+> | `Hadoop  HDFS`      | `Google  GFS`       | 分布式文件系统 |
+> | `Hadoop  MapReduce` | `Google  MapReduce` | 分布式计算     |
+> | `HBase`             | `Google  BigTable`  | 分布式数据库   |
+> | `ZooKeeper`         | `Google Chubby`     | 消息队列       |
+> | `Pig`               | `Google  Sawzall`   | 脚本语言       |
 
 通过调用程序库，可使用简单的编程模型处理分布在不同机器上的大规模数据。
 
 采用客户-服务器模式，很容易从一台机器扩展至成千上万台机器，每台机器均能提供本地存储和本地计算。
 
-##### Hadoop 1.0
+##### `Hadoop 1.0`
 
 - `Hadoop Common`：支持其他两个模块的公用组件
 
@@ -116,7 +118,7 @@ Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大�
 
 - `Hadoop MapReduce`：分布式计算框架
 
-##### Hadoop 2.0
+##### `Hadoop 2.0`
 
 ![image-20211015170805021](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211015170805021.png)
 
@@ -124,7 +126,7 @@ Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大�
 
 - `ZooKeeper`：通用的分布式集群的数据管理者
 
-  不仅仅只是为Hadoop服务！集群化思想
+  不仅仅只是为`Hadoop`服务！集群化思想
 
   - 统一命名服务
   - 配置管理
@@ -172,31 +174,31 @@ Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大�
 
 #### 部署方式
 
-传统解压包（繁琐易错）和标准Linux部署方式（简单易用）
+传统解压包（繁琐易错）和标准`Linux`部署方式（简单易用）
 
 ![image-20211015095217686](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211015095217686.png)
 
-> 注意下面均以Hadoop 2.0为基础
+> 注意下面均以`Hadoop 2.0`为基础
 
 ## 体系架构
 
-### Common
+### `Common`
 
 其他模块的公共组件，定义程序员取得集群服务的编程接口，为其他模块提供共用API。
 
 #### 作用
 
-降低Hadoop设计的复杂性，减少其他模块间耦合性，增强Hadoop健壮性。
+降低`Hadoop`设计的复杂性，减少其他模块间耦合性，增强`Hadoop`健壮性。
 
 #### 功能
 
-- 提供公用API和程序员编程接口（例如Configuration类）；
-- 本地Hadoop库（例如压缩解压缩用的是Hadoop本地库）；
-- 超级用户superuser；
+- 提供公用API和程序员编程接口（例如`Configuration`类）；
+- 本地Hadoop库（例如压缩解压缩用的是`Hadoop`本地库）；
+- 超级用户`superuser`；
 - 服务级别认证；
-- HTTP认证；
+- `HTTP`认证；
 
-### HDFS
+### `HDFS`
 
 高容错、高扩展、高可靠，并提供服务访问接口，如API接口和管理员接口。
 
@@ -302,13 +304,15 @@ Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大�
 
 ### 拓展
 
-- 在Hadoop框架内定义新的计算任务——编程模板
-- 跳出Hadoop的限制——==Spark==——定义更加通用的编程
+- 在`Hadoop`框架内定义新的计算任务——编程模板
+- 跳出`Hadoop`的限制——==Spark==——定义更加通用的编程
 - 安全机制——不同级别、不同场景的安全认证
 
 ## 访问接口
 
 ### Web
+
+> 注意到新版本中Hadoop的都统一到9870端口了，下面那个表格的端口号要改
 
 | 服务        | Web地址                                 | 配置文件          | 配置参数                                  |
 | ----------- | --------------------------------------- | ----------------- | ----------------------------------------- |
@@ -318,17 +322,17 @@ Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大�
 
 ### 命令行
 
-#### HDFS命令
+#### `HDFS`命令
 
-- 以tar包方式部署时，其执行方式是`$HADOOP_HOME/bin/hdfs`
+- 以`tar`包方式部署时，其执行方式是`$HADOOP_HOME/bin/hdfs`
 - 以完全模式部署时，使用HDFS用户执行`hdfs`即可
 
-#### Yarn命令
+#### `Yarn`命令
 
 - 以tar包方式部署时，其执行方式是`$HADOOP_HOME/bin/yarn`
 - 以完全模式部署时，使用`Yarn`用户执行`yarn`即可
 
-#### Hadoop命令
+#### `Hadoop`命令
 
 - 两种部署方式下分别为`$HADOOP_HOME/bin/Hadoop` 和 `hadoop`
 
@@ -363,9 +367,9 @@ Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大�
 
 `Hadoop`默认实现了`MapReduce`的`Client`和`ApplicationMaster`、`MRClientService`和`MRAppMaster`等。
 
-`Yarn`处理MR程序时使用了各种默认的类。
+`Yarn`处理`MR`程序时使用了各种默认的类。
 
-# Spark
+# `Spark`
 
 ## 概论
 
@@ -465,6 +469,16 @@ Hadoop 1.0 （1.X的统称）和Hadoop 2.0 （2.X的统称）架构差异较大�
 
   适用多种不同数据存储方式（数据读取接口丰富）
 
+#### 改进之处的差异
+
+> 复习课专门提了一下，不是很懂他意思
+
+`Hadoop 2.0`对`Hadoop 1.0`的改进主要是引进了`Yarn`，在`Map-Reduce`的基础上又分出了`Master`和`Worker`，完善了任务管理分配调度方面；
+
+`Spark`的改进则主要是为`Map-Reduce`增添了算子，丰富了`Map-Reduce`的功能与应用；
+
+> 据说2021年考试到此为止
+
 ### 部署模式
 
 #### Local模式
@@ -501,16 +515,16 @@ Cluster是真正的集群模式
 
 ### `RDD`（`Resilient Distributed Datasets`）
 
-Spark是建立在RDD(Resilient Distributed Datasets，弹性分布式数据集)之上的。
+`Spark`是建立在`RDD`(`Resilient Distributed Datasets`，弹性分布式数据集)之上的。
 
-RDD是一个==容错的==、==并行的==逻辑数据结构，使得Spark可以用一致的方式处理大数据的不同应用场景。
+`RDD`是一个==容错的==、==并行的==逻辑数据结构，使得`Spark`可以用一致的方式处理大数据的不同应用场景。
 
 #### 性质
 
-RDD是高度受限的共享内存模型。
+`RDD`是高度受限的共享内存模型。
 
-- RDD只能从外界接入或由其他RDD产生。
-- 从父RDD到子RDD的过程可以构建一棵树（有向无环图，`Directed Acyclic Graph（DAG）`）。若子RDD出现问题，可以通过父RDD重新推演。
+- `RDD`只能从外界接入或由其他`RDD`产生。
+- 从父`RDD`到子`RDD`的过程可以构建一棵树（有向无环图，`Directed Acyclic Graph（DAG）`）。若子`RDD`出现问题，可以通过父`RDD`重新推演。
 
 #### 特点
 
@@ -522,14 +536,14 @@ RDD是高度受限的共享内存模型。
 
 #### 五大特性
 
-- 分区列表：记录了数据块所在的分区位置；一个RDD对应的数据是切分为数据块存储在集群的不同节点上的。
+- 分区列表：记录了数据块所在的分区位置；一个`RDD`对应的数据是切分为数据块存储在集群的不同节点上的。
 
-- 依赖列表：记录了当前这个RDD依赖于哪些其它的RDD。
+- 依赖列表：记录了当前这个`RDD`依赖于哪些其它的`RDD`。
 
-- 计算函数：用于计算RDD各个分区的值。
+- 计算函数：用于计算`RDD`各个分区的值。
 
-- **可选**：分区器，子类可以重新指定新的分区方式：Hash和Range。
-- **可选**：计算各分区时优先的位置列表。例如从HDFS文件生成RDD时，HDFS文件所在位置就是对应生成的RDD分区所在位置的优先选择。
+- **可选**：分区器，子类可以重新指定新的分区方式：`Hash`和`Range`。
+- **可选**：计算各分区时优先的位置列表。例如从`HDFS`文件生成`RDD`时，`HDFS`文件所在位置就是对应生成的`RDD`分区所在位置的优先选择。
 
 #### 两种算子
 
@@ -842,6 +856,8 @@ RDD是高度受限的共享内存模型。
 ## "实践"
 
 > 参考：https://spark.apache.org/docs/2.1.1/programming-guide.html
+>
+> 不考不细讲，嗯，就这样。
 
 ### 基础
 

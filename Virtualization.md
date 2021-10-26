@@ -24,9 +24,9 @@
 
 ## 虚拟化的层次
 
-![image-20211006173424388](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006173424388.png)
+![image-20211006173424388](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006173424388.png)
 
-![image-20211006174817362](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006174817362.png)
+![image-20211006174817362](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006174817362.png)
 
 > 这个图里面由于实现复杂度是越低越好，所以X越多代表实现越简单。
 
@@ -42,35 +42,19 @@
 
 虚拟机同时运行时，共享的底层系统资源对某些虚拟机而言不一定可用。
 
-### 裸机虚拟化与寄居虚拟化
-
-#### 裸机虚拟化
-
-==没有主机操作系统== 。Hypervisor直接对硬件切分和抽象，再安装客户操作系统。如`ESXi`。
-
-#### 寄居虚拟化
-
-需要==主机操作系统==，再运行`VMM`，再安装操作系统。如`VMWare Workstation`。
-
-> 补充：两种不同级别的`Hypervisor`
->
-> https://www.vmware.com/topics/glossary/content/hypervisor
->
-> Ⅰ类是直接跑在硬件上的，不需要以主机操作系统为基础，如`ESXi`；
->
-> Ⅱ类需要跑在一个特定的操作系统上。
+> 裸机虚拟化和寄居虚拟化放服务器虚拟化那边
 
 ### 全虚拟化
 
 Hypervisor或VMM负责控制硬件和“传话”。比如说各类指令集虚拟化方式（？）和部分硬件辅助虚拟化方式。
 
-![image-20211006172910715](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006172910715.png)
+![image-20211006172910715](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006172910715.png)
 
 ### 半虚拟化
 
 不再以普通操作系统的方式访问虚拟硬件资源，需要修改==虚拟机==操作系统。
 
-![image-20211006172902227](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006172902227.png)
+![image-20211006172902227](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006172902227.png)
 
 ### 硬件辅助虚拟化
 
@@ -121,7 +105,7 @@ Docker容器与传统虚拟机不同：==不使用客户操作系统==，==包�
 
 - 适合没有编排的多个应用使用 vs. 适用于编排条件下多个副本相同的应用扩展；
 
-![image-20211006175156001](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006175156001.png)
+![image-20211006175156001](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006175156001.png)
 
 ## 程序库API级虚拟化
 
@@ -129,7 +113,7 @@ Docker容器与传统虚拟机不同：==不使用客户操作系统==，==包�
 
 ## 应用程序级虚拟化
 
-![image-20211006173941588](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006173941588.png)
+![image-20211006173941588](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006173941588.png)
 
 ## 发展趋势
 
@@ -142,13 +126,13 @@ Docker容器与传统虚拟机不同：==不使用客户操作系统==，==包�
 - - LibOS：在应用程序层中实施访问控制和隔离，用户应用无需在用户模式和内核模式间切换，直接访问硬件；然而多个应用程序同时运行时隔离性不好。
   - 使用操作系统虚拟化克服硬件资源隔离缺陷：LibOS通过VMM驱动物理硬件，像虚拟机一样运行。
 
-![image-20211006175541386](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006175541386.png)
+![image-20211006175541386](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006175541386.png)
 
 ## 具体虚拟化技术介绍
 
-![image-20211006175736423](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006175736423.png)
+![image-20211006175736423](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006175736423.png)
 
-![image-20211006175747074](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006175747074.png)
+![image-20211006175747074](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006175747074.png)
 
 # 云计算与虚拟化
 
@@ -157,6 +141,24 @@ Docker容器与传统虚拟机不同：==不使用客户操作系统==，==包�
 ### 定义
 
 将一个或多个物理服务器虚拟成多个逻辑上的服务器。
+
+### 裸机虚拟化与寄居虚拟化（服务器虚拟化的两种技术类型）
+
+#### 裸机虚拟化/硬件仿真虚拟化
+
+==没有主机操作系统== 。`Hypervisor`直接对硬件切分和抽象，再安装客户操作系统。如`ESXi`。
+
+#### 寄居虚拟化
+
+需要==主机操作系统==，再运行`VMM`，再安装操作系统。如`VMWare Workstation`。
+
+> 补充：两种不同级别的`Hypervisor`
+>
+> https://www.vmware.com/topics/glossary/content/hypervisor
+>
+> Ⅰ类是直接跑在硬件上的，不需要以主机操作系统为基础，如`ESXi`；
+>
+> Ⅱ类需要跑在一个特定的操作系统上。
 
 ### CPU虚拟化
 
@@ -168,7 +170,7 @@ Docker容器与传统虚拟机不同：==不使用客户操作系统==，==包�
 
 - 各个操作系统之间虚拟CPU运行相互隔离，互不影响；
 
-![image-20211006221148678](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006221148678.png)
+![image-20211006221148678](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006221148678.png)
 
 |                             执行                             |                             调度                             |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
@@ -188,7 +190,7 @@ Docker容器与传统虚拟机不同：==不使用客户操作系统==，==包�
 
 > 仅当敏感指令集是特权指令集的子集时才能构造VMM。
 >
-> ![image-20211006230034195](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006230034195.png)
+> ![image-20211006230034195](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006230034195.png)
 
 #### 虚拟机隔离
 
@@ -240,11 +242,11 @@ Docker容器与传统虚拟机不同：==不使用客户操作系统==，==包�
 
 注意到有==基于软件==的内存虚拟化和==硬件辅助==的内存虚拟化之分。
 
-![image-20211006230525144](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006230525144.png)
+![image-20211006230525144](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006230525144.png)
 
 #### 内存隔离
 
-##### 内存管理单元 Memory Management Unit
+##### 内存管理单元 `Memory Management Unit`
 
 - 管理虚拟存储器的控制路线
 
@@ -274,7 +276,7 @@ I/O设备虚拟化同样是由VMM进行管理的。I/O设备虚拟化能欺骗�
 
 - 设备的==模拟==：见下图
 
-  ![image-20211006231140178](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006231140178.png)
+  ![image-20211006231140178](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006231140178.png)
 
   > `VT-d`技术是最右侧方式的典型代表
 
@@ -300,7 +302,7 @@ I/O设备虚拟化同样是由VMM进行管理的。I/O设备虚拟化能欺骗�
 
 ##### 实现原理与效果
 
-![image-20211006233610659](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006233610659.png)
+![image-20211006233610659](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006233610659.png)
 
 ### 虚拟机迁移
 
@@ -327,7 +329,7 @@ I/O设备虚拟化同样是由VMM进行管理的。I/O设备虚拟化能欺骗�
 
 #### 迁移过程
 
-![image-20211006232022517](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006232022517.png)
+![image-20211006232022517](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006232022517.png)
 
 #### 迁移内存：==最困难==之处
 
@@ -357,7 +359,7 @@ I/O设备虚拟化同样是由VMM进行管理的。I/O设备虚拟化能欺骗�
 
 存储虚拟化将系统中==分散==且==异构==的存储资源整合起来，建立一个统一的连续编址的逻辑存储空间。
 
-<img src="https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006234341048.png" alt="image-20211006234341048" style="zoom:50%;" />
+<img src="https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006234341048.png" alt="image-20211006234341048" style="zoom:50%;" />
 
 ### 意义
 
@@ -379,7 +381,7 @@ I/O设备虚拟化同样是由VMM进行管理的。I/O设备虚拟化能欺骗�
 
 ### 实现方式
 
-![image-20211006234400964](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006234400964.png)
+![image-20211006234400964](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006234400964.png)
 
 > 课上还补充了`vSphere`的实例
 
@@ -408,7 +410,7 @@ I/O设备虚拟化同样是由VMM进行管理的。I/O设备虚拟化能欺骗�
 
 > 详细内容见数据中心节
 
-![image-20211006235028492](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006235028492.png)
+![image-20211006235028492](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006235028492.png)
 
 ## 桌面虚拟化
 
@@ -418,7 +420,7 @@ I/O设备虚拟化同样是由VMM进行管理的。I/O设备虚拟化能欺骗�
 
 **第二代桌面虚拟化技术**进一步将桌面系统的运行环境与安装环境、应用与桌面配置文件进行了拆分，从而大大降低了管理复杂度与成本，提高了管理效率。
 
-![image-20211006234808711](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Virtualization.assets/image-20211006234808711.png)
+![image-20211006234808711](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Virtualization.assets/image-20211006234808711.png)
 
 > 在这方面最常见的部署方式莫过于瘦客户机+中央服务器的组合了。桌面上放的小电脑仅用于开远程桌面或其他类似技术到中央服务器的虚拟机上。
 >

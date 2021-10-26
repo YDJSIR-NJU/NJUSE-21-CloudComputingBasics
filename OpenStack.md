@@ -6,9 +6,9 @@
 
 `OpenStack`是开源云计算平台，可控制整个数据中心的大型计算，存储和网络资源池。
 
-用户能够通过Web界面、命令行或API接口配置资源。
+用户能够通过`Web界面`、`命令行`或`API接口`配置资源。
 
-![image-20211010080049370](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010080049370.png)
+![image-20211010080049370](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010080049370.png)
 
 > 这张图下面的英文原文就是第一第二句话的英文版……
 
@@ -23,11 +23,11 @@
 
 定位：云计算操作系统：云计算的==控制面==
 
-![image-20211010080215829](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010080215829.png)
+![image-20211010080215829](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010080215829.png)
 
-- OSS: Operations Support System；
+- `OSS`: `Operations Support System`；
 
-- BSS: Business Support System；
+- `BSS`: `Business Support System`；
 
 ### 小结
 
@@ -35,7 +35,7 @@
 
 `OpenStack`是一个管理==计算== - 如``Nova``、==存储== - 如``Swift``、 和==网络== - 如``Neutron``资源的数据中心云计算开放平台，通过一个仪表板，为管理员提供了所有的管理控制，同时通过Web界面为其用户提供资源。
 
-![image-20211010080731853](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010080731853.png)
+![image-20211010080731853](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010080731853.png)
 
 ## 架构概述
 
@@ -65,9 +65,13 @@
 
 
 
-![image-20211010084947432](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010084947432.png)
+![image-20211010084947432](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010084947432.png)
 
-![image-20211010093418210](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010093418210.png)
+#### ==概念模型==
+
+![image-20211026202416554](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211026202416554.png)
+
+![image-20211010093418210](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010093418210.png)
 
 | **功能类别** | **角色**                   |              |
 | ------------ | -------------------------- | ------------ |
@@ -153,13 +157,17 @@
 
 控制、网络、计算、存储
 
-![image-20211010092953676](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010092953676.png)
+![image-20211010092953676](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010092953676.png)
 
-#### 逻辑模型设计
+#### ==逻辑模型==设计
 
-控制节点中封装了大量的`OpenStack`的服务
+控制节点中封装了大量的`OpenStack`的服务。
 
-![image-20211010090137952](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010090137952.png)
+![image-20211026202233458](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211026202233458.png)
+
+> 这个图答题时代表性应该更强一些
+
+![image-20211010090137952](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010090137952.png)
 
 #### 存储设计
 
@@ -169,19 +177,19 @@
 
 网络服务是`OpenStack`服务中最复杂的。
 
-- 使用隔离的物理网络处理不同类型的网络流量
+- 使用隔离的物理网络处理不同类型的网络流量；
 
-- 租户数据网络：为租户创建的虚拟网络提供物理路径
+- 租户数据网络：为租户创建的虚拟网络提供物理路径；
 
-- 管理和API网络：`OpenStack`服务之间的通信，可细分
+- 管理和API网络：`OpenStack`服务之间的通信，可细分；
 
-- 存储网络：虚拟机和存储节点之间的物理连接
+- 存储网络：虚拟机和存储节点之间的物理连接；
 
 ##### 虚拟网络类型
 
-- 外部网络：全局互联并使用可路由的IP寻址；`SNAT`虚拟机访问外网；`DNAT`外网访问虚拟机
+- 外部网络：全局互联并使用可路由的IP寻址；`SNAT`虚拟机访问外网；`DNAT`外网访问虚拟机；
 
-- 租户网络：虚拟机之间专用网络；私有IP空间；租户流量隔离
+- 租户网络：虚拟机之间专用网络；私有IP空间；租户流量隔离；
 
 #### 估算
 
@@ -193,23 +201,23 @@
 
 ##### 内存评估
 
-单台物理机虚拟机个数*虚拟机最大动态分配内存+主机内存用量
+单台物理机虚拟机个数*虚拟机最大动态分配内存+主机内存用量。
 
 ##### 网络评估
 
-网卡带宽>单个虚拟机带宽*虚拟机个数；公共IP地址个数；浮动IP地址个数
+网卡带宽>单个虚拟机带宽*虚拟机个数；公共IP地址个数；浮动IP地址个数。
 
 ##### 存储评估
 
-虚拟机的临时存储+永久存储；存储节点的对象存储、块存储和文件共享存储
+虚拟机的临时存储+永久存储；存储节点的对象存储、块存储和文件共享存储。
 
 ##### 最佳实践
 
-分析需求、考虑需求增长情况、持续跟踪每一个服务单元、丢弃和替换服务单元；按需调整
+分析需求、考虑需求增长情况、持续跟踪每一个服务单元、丢弃和替换服务单元；按需调整。
 
-#### 一个示例
+#### ==物理模型==
 
-![image-20211010090446149](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010090446149.png)
+![image-20211010090446149](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010090446149.png)
 
 - 五种节点：部署各个系统的不同组件
 
@@ -217,27 +225,27 @@
 
   不难发现计算节点连外网是通过虚拟机流量网络先到网络节点再出去的。
 
-- 三层网络：不同的使用目的；`OpenStack`内部网络、外部网络、虚机网络
+- 三层网络：不同的使用目的；`OpenStack`内部网络、外部网络、虚机网络。
 
 ## 部署
 
 ### +DevOps
 
-让研发（Development）和运维（Operations）一体化，让团队从业务需求出发，向着同一个目标前进。
+让研发（`Development`）和运维（`Operations`）一体化，让团队从业务需求出发，向着同一个目标前进。
 
-DevOps（Development和Operations的组合）是一组过程、方法与系统的统称，用于促进开发（应用程序/软件工程）、技术运营和质量保障（QA）部门之间的沟通、协作与整合。
+`DevOps`（`Development`和`Operations`的组合）是一组过程、方法与系统的统称，用于促进开发（应用程序/软件工程）、技术运营和质量保障（QA）部门之间的沟通、协作与整合。
 
-- 简化和模块化`OpenStack`服务；像开发构建模块一样开发`OpenStack`服务
+- 简化和模块化`OpenStack`服务；像开发构建模块一样开发`OpenStack`服务；
 
-- 在不影响整个系统的情况下，促进服务的定制和改进
+- 在不影响整个系统的情况下，促进服务的定制和改进；
 
-- 使用正确的工具来构建服务，确保服务在相同输入情况下输出相同结果
+- 使用正确的工具来构建服务，确保服务在相同输入情况下输出相同结果；
 
-- 将服务愿景从如何做切换到要做什么
+- 将服务愿景从如何做切换到要做什么；
 
 ### 工具
 
-**Ansible**：物理环一定程度上的自动化部署
+**`Ansible`**：一定程度上的自动化部署。
 
 > 环境构建、开发机初始化、安装Git、执行引导程序仍需要手动完成
 
@@ -245,19 +253,19 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
 ### 集群：提供高可用性
 
-两台或多台服务器的能力聚合就是服务器集群，通过堆积机器即可实现这种聚合
+两台或多台服务器的能力聚合就是服务器集群，通过堆积机器即可实现这种聚合。
 
-- 向上扩展（垂直扩展）：向服务器添加更多的CPU和内存
+- 向上扩展（垂直扩展）：向服务器添加更多的CPU和内存；
 
-- 向下扩展（水平扩展）：增加更多的标准商用服务器
+- 向下扩展（水平扩展）：增加更多的标准商用服务器；
 
 ### 非对称集群
 
-备服务器只有在主服务器发生故障时才接管系统，处于高可用目的，包含故障切换配置
+备服务器只有在主服务器发生故障时才接管系统，处于高可用目的，包含故障切换配置。
 
 ### 对称集群
 
-所有节点都是活动的，共享工作负载，可视为负载均衡集群
+所有节点都是活动的，共享工作负载，可视为负载均衡集群。
 
 `OpenStack`的功能被广泛分布到多个服务中，包含了基础架构服务和`OpenStack`服务
 
@@ -267,11 +275,11 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
 #### 消息队列
 
-必须是集群式的；RabbitMQ，ZeroMQ，Qpid
+必须是集群式的；`RabbitMQ`，`ZeroMQ`，`Qpid`。
 
 #### 整合数据库
 
-`OpenStack`的环境数据，使用数据等；MySQL和MongoDB
+`OpenStack`的环境数据，使用数据等；`MySQL`和`MongoDB`。
 
 ### `OpenStack`服务
 
@@ -369,7 +377,7 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
 |                                                              |                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20211010094715897](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010094715897.png) | ![image-20211010094723895](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010094723895.png) |
+| ![image-20211010094715897](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010094715897.png) | ![image-20211010094723895](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010094723895.png) |
 
 ## 节点详解：计算节点
 
@@ -379,7 +387,7 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
 `OpenStack`中虚拟机管理程序能够支持各种VMM以及Docker。
 
-![image-20211010095423614](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095423614.png)
+![image-20211010095423614](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095423614.png)
 
 #### `Nova Docker`
 
@@ -395,11 +403,11 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
   Pod是COE最基本的部署调度单元，逻辑上对应一个服务实例，运行一组容器，必须有一个作为网络路由
 
-  ![image-20211010095507147](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095507147.png)
+  ![image-20211010095507147](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095507147.png)
 
 ### 相关概念
 
-![image-20211010095535677](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095535677.png)
+![image-20211010095535677](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095535677.png)
 
 `Region`：地理区域
 
@@ -411,7 +419,7 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
 > 各大公有云一般是同地理区域内都是内网直通的。
 
-![image-20211010095658676](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095658676.png)
+![image-20211010095658676](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095658676.png)
 
 > 除了HA和Service，其他概念其实都挺好找的。
 
@@ -427,7 +435,7 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
 - 计算单元：每个单元有自己的消息队列和数据库
 
-![image-20211010095854690](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010095854690.png)
+![image-20211010095854690](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095854690.png)
 
 ## 节点详解：存储节点
 
@@ -439,7 +447,7 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
 为后端不同的存储设备提供了统一的接口，不同的块设备服务厂商在``Cinder``中实现其驱动支持以与``OpenStack``进行整合。
 
-![image-20211010100114078](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/OpenStack.assets/image-20211010100114078.png)
+![image-20211010100114078](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010100114078.png)
 
 ## 节点详解：网络节点
 
@@ -455,18 +463,18 @@ DevOps（Development和Operations的组合）是一组过程、方法与系统�
 
 - 提供了基于开源技术的插件和代理参考实现
 
-- 网络节点提供资源实现网络服务：路由、防火墙、负载均衡器和VPN
+- 网络节点提供资源实现网络服务：路由、防火墙、负载均衡器和`VPN`
 
 - 核心插件：创建和管理网络、端口和子网
 
 - 服务插件：实现高阶网络服务，路由、防火墙等
 
-- 代理：部署在计算和网络节点上，通过消息总线上的RPC和服务器交互
+- 代理：部署在计算和网络节点上，通过消息总线上的`RPC`和服务器交互
 
-- - L2代理：运行在计算和网络基点上，将虚拟机和网络设备连接到二层网络上
-  - DHCP代理、L3代理和VPN代理
+- - `L2`代理：运行在计算和网络基点上，将虚拟机和网络设备连接到二层网络上
+  - `DHCP`代理、`L3`代理和`VPN`代理
 
-  比如说基于VLAN或其他隧道。
+  比如说基于`VLAN`或其他隧道。
 
 ## 拓展
 

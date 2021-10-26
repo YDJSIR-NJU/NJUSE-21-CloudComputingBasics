@@ -30,9 +30,9 @@
 >
 > 背景是小型计算机的出现
 
-**计算机集群**：计算抽象
+##### **计算机集群**：计算抽象
 
-将多个可信、静态的独立节点连接起来协作完成计算
+将多个可信、静态的独立节点连接起来协作完成计算。
 
 - 基本组件为计算节点、通信软件、网络接口卡
 
@@ -42,17 +42,17 @@
 
 - 以单独计算机身份接入互联网
 
-**P2P** **网络**：存储抽象
+##### **P2P** **网络**：存储抽象
 
-每一个节点既是客户端也是服务器，提供部分系统资源
+每一个节点既是客户端也是服务器，提供部分系统资源。
 
 - 节点是简单接入互联网的客户机，自治、自由加入和退出
 
 - 无中心协作或中心数据库；没有专用的物理互联网络
 
-**计算网格**：接近“云”
+##### **计算网格**：接近“云”
 
-将多个异构计算机动态、紧耦合地整合在一起完成计算任务
+将多个异构计算机动态、紧耦合地整合在一起完成计算任务。
 
 - 计算资源整合，一个集成的资源池，提供基础设施；类比电力网格
 
@@ -66,17 +66,31 @@
 
 大数据时代（2008）
 
-![image-20210924111120703](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924111120703.png)
+![image-20210924111120703](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924111120703.png)
 
-- ==3V==： Volume(量大), Variety(多样), Velocity(快速), 
+- ==3V==： `Volume`（量大）, `Variety`（多样）, `Velocity`（快速）；
 
-- ==4V+1C==：Value(低价值密度), Complexity(复杂：处理和分析难度大)
+- ==4V+1C==：`Value`（低价值密度）, `Complexity`（复杂：处理和分析难度大）；
 
-- ==5V==：Volume, Variety, Velocity, Value, Veracity(真实)
+- ==5V==：`Volume`, `Variety`, `Velocity`, `Value`, `Veracity`（真实）；
 
 **一切皆为** **(** **`wéi`** **)** **大数据，一切皆为** **(** **`wèi`** **)** **大数据。**
 
-![image-20210924111315108](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924111315108.png)
+![image-20210924111315108](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924111315108.png)
+
+#### 为什么要云计算？
+
+- 一切皆为大数据，一切皆为大数据。大数据促进了云计算的产生，激发了云计算的潜力。云计算为大数据的收集、存储、加工、应用提供了更好的支持；
+
+- 在云计算产生的时代，数据、算力和网络资源都已充足，在人工智能、物联网和互联网+的应用需求下，云计算便适时地产生了；
+
+  > 下面是云计算的优点
+
+- 成本优势、规模优势和易用优势；
+
+- 弹性与高可靠、高可用；
+
+- 管理优势
 
 ## 概述
 
@@ -118,7 +132,7 @@
 
 #### 概念模型
 
-![image-20210924110619624](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924110619624.png)
+![image-20210924110619624](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924110619624.png)
 
 #### 现实故事
 
@@ -129,7 +143,7 @@
 |              商业               |            技术            |
 | 2006年3月，Computing Cloud，EC2 | 2006年8月，Cloud Computing |
 
-![image-20210924114900657](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924114900657.png)
+![image-20210924114900657](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924114900657.png)
 
 ### 为何称“云”？
 
@@ -161,17 +175,17 @@
 
 #### 三种基本服务模型
 
-![image-20210924112233030](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924112233030.png)
+![image-20210924112233030](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924112233030.png)
 
 > `aaS`的例子还有很多，毕竟可以构词。但最基础的就上面三种。下图更好地呈现了三种`aaS`之间的关系，并引入了一个`DaaS`：Data as a Service
 
-![image-20210924112144094](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924112144094.png)
+![image-20210924112144094](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924112144094.png)
 
 > 下图则从用户视角对比三种服务模型。
 
-![image-20210924113120032](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924113120032.png)
+![image-20210924113120032](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924113120032.png)
 
-#### IaaS
+#### `IaaS`
 
 - 通过虚拟机方式对外提供计算和存储能力
 
@@ -191,7 +205,7 @@
 
 > 比如说各类云服务器
 
-#### PaaS
+#### `PaaS`
 
 - 提供用户应用程序的运行环境
 
@@ -201,33 +215,33 @@
 
 - 用户自主权降低，需按照给定的编程环境和编程模型构建应用
 
-类似MPI (Message Passing Interface)编程，只适用于解决模型特定的计算问题
+类似MPI (`Message Passing Interface`)编程，只适用于解决模型特定的计算问题
 
-> 比如说Google App Engine
+> 比如说`Google App Engine`
 
-#### SaaS
+#### `SaaS`
 
 针对性更强，只提供某些专门用途的服务供应用调用。
 
-> 日常接触到的互联网软件很多都可以算是SaaS
+> 日常接触到的互联网软件很多都可以算是`SaaS`
 
 ### 实现机制
 
-#### SOA (Service-oriented Architecture) 面向服务的体系结构
+#### `SOA` (`Service-oriented Architecture`) 面向服务的体系结构
 
-将Service（服务）作为**分布式对象**（RMI，RPC，CORBA？）
+将`Service`（服务）作为**分布式对象**（`RMI`，`RPC`，`CORBA`？）
 
 设计一套使用服务的软件系统，使得服务间的互操作性变得可扩展和有效的
 
-特点：松耦合，定义并发布接口，基于标准的通信模型（如REST）
+特点：松耦合，定义并发布接口，基于标准的通信模型（如`REST`）
 
-![image-20210924113302549](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924113302549.png)
+![image-20210924113302549](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924113302549.png)
 
-![image-20210924113321833](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924113321833.png)
+![image-20210924113321833](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924113321833.png)
 
 ==管理中间件层==和==资源池层==是云计算技术的最关键部分，SOA构建层的功能更多依靠外部设施提供。
 
-![image-20210924114131799](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924114131799.png)
+![image-20210924114131799](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924114131799.png)
 
 ### 部署模型
 
@@ -255,7 +269,7 @@
 
 全球企业IT开销发展趋势：能耗接近硬件成本；管理成本线性增长。
 
-![image-20210924114552403](https://ydjsir-cn.oss-cn-shenzhen.aliyuncs.com/GitPages/CloudComputing/Basics.assets/image-20210924114552403.png)
+![image-20210924114552403](https://oss.ydjsir.com.cn/GitPages/CloudComputing/Basics.assets/image-20210924114552403.png)
 
 #### 可拓展性与可伸缩性
 
