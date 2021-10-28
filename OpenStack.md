@@ -33,7 +33,7 @@
 
 `OpenStack`既是一个社区，也是一个项目和一个开源软件，提供了一个部署云的操作平台或工具集。用`OpenStack`易于构建虚拟计算或存储服务的云，既可以为公有云、私有云，也可以为大云、小云提供可扩展、灵活的云计算。
 
-`OpenStack`是一个管理==计算== - 如``Nova``、==存储== - 如``Swift``、 和==网络== - 如``Neutron``资源的数据中心云计算开放平台，通过一个仪表板，为管理员提供了所有的管理控制，同时通过Web界面为其用户提供资源。
+`OpenStack`是一个管理==计算== - 如``Nova``、==存储== - 如`Swift`、 和==网络== - 如``Neutron``资源的数据中心云计算开放平台，通过一个仪表板，为管理员提供了所有的管理控制，同时通过Web界面为其用户提供资源。
 
 ![image-20211010080731853](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010080731853.png)
 
@@ -60,8 +60,8 @@
 - `Telemetry`：计量服务，计量租户资源使用率
 - `Heat`：编排服务，面向`OpenStack`开发者
 - `Horizon`：仪表盘服务，无状态无数据的web应用
-- 消息队列：中心化的消息交换器
-- 数据库：构建时和运行时状态信息
+- 消息队列（如`RabbitMQ`）：中心化的消息交换器
+- 数据库（如下图的`Trove`）：构建时和运行时状态信息
 
 
 
@@ -102,7 +102,7 @@
 会将数据拆分到任意划分且大小相同的==卷==中。
 
 - 适合大量数据情形，灵活
-- 将数据与用户环境分离
+- ==将数据与用户环境分离==
 - 块存储的成本高昂
 - 处理元数据的能力有限；这意味着，它需要在应用或数据库级别进行处理
 
@@ -233,7 +233,7 @@
 
 让研发（`Development`）和运维（`Operations`）一体化，让团队从业务需求出发，向着同一个目标前进。
 
-`DevOps`（`Development`和`Operations`的组合）是一组过程、方法与系统的统称，用于促进开发（应用程序/软件工程）、技术运营和质量保障（QA）部门之间的沟通、协作与整合。
+`DevOps`（`Development`和`Operations`的组合）是一组过程、方法与系统的统称，用于促进开发（应用程序/软件工程）、技术运营和质量保障（`QA`）部门之间的沟通、协作与整合。
 
 - 简化和模块化`OpenStack`服务；像开发构建模块一样开发`OpenStack`服务；
 
@@ -291,17 +291,17 @@
 
 由多个`Provider`组成。
 
-- 身份提供者Identity `Provider`：服务用户、管理员用户、终端用户
+- 身份提供者`Identity` `Provider`：服务用户、管理员用户、终端用户；
 
-- 资源提供者resource `Provider`： project、domain
+- 资源提供者`Resource` `Provider`： `project`、`domain`；
 
-- 认证提供者Authorization `Provider`：用户和用户组和他们角色之间的关系
+- 认证提供者`Authorization` `Provider`：用户和用户组和他们角色之间的关系；
 
-- 令牌提供者Token `Provider`：访问`OpenStack`服务需要一个有效的令牌，通过身份提供者的认证后获得令牌
+- 令牌提供者`Token` `Provider`：访问`OpenStack`服务需要一个有效的令牌，通过身份提供者的认证后获得令牌；
 
-- 目录提供者Catalog `Provider`：维护服务和API端点的目录
+- 目录提供者`Catalog` `Provider`：维护服务和API端点的目录
 
-- 策略提供者Policy `Provider`：策略由多条规则组成，每条规则定义了哪些用户和角色被允许访问哪些资源
+- 策略提供者`Policy` `Provider`：策略由多条规则组成，每条规则定义了哪些用户和角色被允许访问哪些资源；
 
 ### `Nova`==管理组件及API==
 
@@ -335,11 +335,11 @@
 
 在生产环境下，配置单独的存储主机，其调度器运行在存储主机上。
 
-##### ==`Nova`-compute运行在计算节点上==
+##### ==`Nova-compute`运行在计算节点上==
 
 ##### `Nova-network`
 
-则可以被`Neutron`替代，网络API驻留在云控制器中，独立配置网络服务器节点。
+可以被`Neutron`替代，网络API驻留在云控制器中，独立配置网络服务器节点。
 
 ##### `Glance`
 
@@ -353,7 +353,7 @@
 
 ##### 仪表盘服务
 
-运行在Apache Web服务器后端，可以将其运行在可以访问API端点的单独节点上，降低云控制器负载。
+运行在`Apache Web`服务器后端，可以将其运行在可以访问API端点的单独节点上，降低云控制器负载。
 
 ##### 计量服务
 
@@ -385,7 +385,7 @@
 
 计算节点运行==`Nova`-compute==服务，负责启动和终止虚拟机，通过==消息总线==监听虚拟机相关请求。
 
-`OpenStack`中虚拟机管理程序能够支持各种VMM以及Docker。
+`OpenStack`中虚拟机管理程序能够支持各种`VMM`以及`Docker`。
 
 ![image-20211010095423614](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095423614.png)
 
@@ -393,15 +393,15 @@
 
 类似虚拟机实例启动和管理容器生命周期，然而一个应用或服务往往需要容器组构建。
 
-### Magnum
+### `Magnum`
 
-- 使用容器编排引擎(COE)管理连接着的容器组
+- 使用容器编排引擎(`COE`)管理连接着的容器组
 
-- COE节点部署为`Nova`实例
+- `COE`节点部署为`Nova`实例
 
-- Bay是一组运行COE软件的节点，表示一个容器集群
+- `Bay`是一组运行`COE`软件的节点，表示一个容器集群
 
-  Pod是COE最基本的部署调度单元，逻辑上对应一个服务实例，运行一组容器，必须有一个作为网络路由
+  `Pod`是`COE`最基本的部署调度单元，逻辑上对应一个服务实例，运行一组容器，必须有一个作为网络路由
 
   ![image-20211010095507147](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095507147.png)
 
@@ -409,19 +409,19 @@
 
 ![image-20211010095535677](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095535677.png)
 
-`Region`：地理区域
+- `Region`：地理区域
 
-`Availability Zone`：对某个地理区域的用户而言的可用区域
+- `Availability Zone`：对某个地理区域的用户而言的可用区域
 
-`Host Aggregate`：按照类型将物理主机放到一起组成区域
+- `Host Aggregate`：按照类型将物理主机放到一起组成区域
 
-`Host`：具体的物理主机
+- `Host`：具体的物理主机
 
 > 各大公有云一般是同地理区域内都是内网直通的。
 
 ![image-20211010095658676](https://oss.ydjsir.com.cn/GitPages/CloudComputing/OpenStack.assets/image-20211010095658676.png)
 
-> 除了HA和Service，其他概念其实都挺好找的。
+> 除了`HA`和`Service`，其他概念其实都挺好找的。
 
 ### `Nova`单元
 
@@ -431,7 +431,7 @@
 
 - 由多个计算节点组成一个单元
 
-- API单元：作为树根，使用基于消息队列的RPC调用和计算节点交互
+- `API`单元：作为树根，使用基于消息队列的`RPC`调用和计算节点交互
 
 - 计算单元：每个单元有自己的消息队列和数据库
 

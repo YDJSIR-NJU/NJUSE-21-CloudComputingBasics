@@ -46,7 +46,7 @@
 
 > 分布式存储和分布式计算可以相互独立存在
 
-#### 分布式存储（Distributed File System, DFS）
+#### 分布式存储（`Distributed File System, DFS`）
 
 将多台机器硬盘以某种方式连接到一起
 
@@ -56,9 +56,7 @@
 
 ##### 对内：客户-服务器模式
 
-只要保证store master正常工作，我们很容易随意
-
-添加store slave，硬盘存储空间无限大。
+只要保证`store master`正常工作，我们很容易随意添加`store slave`，硬盘存储空间无限大。
 
 ##### 对外：统一存储空间，统一文件接口
 
@@ -68,7 +66,7 @@
 
 #### 分布式计算
 
-> “移动计算比移动数据更划算”——Google论文
+> “移动计算比移动数据更划算”——`Google`论文
 
 ##### 计算的并行-`Map`
 
@@ -80,17 +78,17 @@
 
 > 经过洗牌之后，合并的时候分布的文本某一个特定单词的计数都送到某一个节点上进行合并，不同单词之间的合并技术可以并行。
 
-### Hadoop简介
+### `Hadoop`简介
 
 #### 渊源
 
-- `Apache`成立开源搜索引擎项目`Nutch`——但开发过程中无法有效地将计算任务分配到多台机器上
+- `Apache`成立开源搜索引擎项目`Nutch`——但开发过程中无法有效地将计算任务分配到多台机器上；
 
-- 前后`Google`陆续发表`GFS`、`MapReduce`、`BigTable`（谷歌三板斧）
+- 前后`Google`陆续发表`GFS`、`MapReduce`、`BigTable`（谷歌三板斧）；
 
-- `Apache`借鉴`GFS`和`MapReduce`，实现了自己的`NDFS`和`MapReduce`
+- `Apache`借鉴`GFS`和`MapReduce`，实现了自己的`NDFS`和`MapReduce`；
 
-- 发现`Nutch`侧重搜索，而`NDFS`和`MapReduce`偏向通用基础架构，将`NDFS`和`MapReduce`移出`Nutch`，成为独立开发项目，称为`Hadoop`
+- 发现`Nutch`侧重搜索，而`NDFS`和`MapReduce`偏向通用基础架构，将`NDFS`和`MapReduce`移出；`Nutch`，成为独立开发项目，称为`Hadoop`；
 
 `Hadoop 1.0` （1.X的统称）和 `Hadoop 2.0` （2.X的统称）架构差异较大。
 
@@ -280,7 +278,7 @@
 ##### 自带策略1：容量调度算法`CapacityScheduler`
 
 - 多用户多任务调度策略；
-- 以队列为单位划分任务，以Container为单位分配资源；
+- 以队列为单位划分任务，以`Container`为单位分配资源；
 - 按照配置好的资源配比为不同层级的用户分配最大可用资源；
 
 ##### 自带策略2：公平调度算法`FairScheduler`
@@ -312,7 +310,7 @@
 
 ### Web
 
-> 注意到新版本中Hadoop的都统一到9870端口了，下面那个表格的端口号要改
+> 注意到新版本中`Hadoop`的都统一到9870端口了，下面那个表格的端口号要改
 
 | 服务        | Web地址                                 | 配置文件          | 配置参数                                  |
 | ----------- | --------------------------------------- | ----------------- | ----------------------------------------- |
@@ -379,7 +377,7 @@
 
 - 2009年——诞生于美国加州大学伯克利分校AMP实验室
 
-- 2013年——Spark成为`Apache`基金项目
+- 2013年——`Spark`成为`Apache`基金项目
 
 - 2014年——成为`Apache`基金顶级项目
 
@@ -399,29 +397,29 @@
 
 ##### `Spark SQL`
 
-- 前身是Shark：基于Hive的Spark SQL，代码量大、复杂，难优化和维护
+- 前身是`Shark`：基于`Hive`的`Spark SQL`，代码量大、复杂，难优化和维护；
 
-- 交互式查询、标准访问接口、兼容Hive
+- 交互式查询、标准访问接口、兼容`Hive`；
 
-- 专门用于处理结构化数据：
+- 专门用于处理结构化数据；
 
-- 分布式SQL引擎；在Spark程序中调用API
+- 分布式`SQL`引擎；在`Spark`程序中调用`API`；
 
 #### `Spark Streaming`
 
-- 实时对大量数据进行快速处理，处理周期短
+- 实时对大量数据进行快速处理，处理周期短；
 
-- 对数据分段、定义了自动监听更新的框架、提供各种Spark计算函数
+- 对数据分段、定义了自动监听更新的框架、提供各种Spark计算函数；
 
 ##### `Spark GraphX`
 
-- 以图为基础数据结构的算法实现和相关应用
+- 以图为基础数据结构的算法实现和相关应用；
 
-- 使用RDD存储图节点和边信息，提供各种计算函数
+- 使用RDD存储图节点和边信息，提供各种计算函数；
 
 ##### `Spark MLlib`
 
-- 为解决机器学习开发的库
+- 为解决机器学习开发的库；
 
 包括`分类`、`回归`、`聚类`和`协同过滤`等。
 
@@ -429,11 +427,11 @@
 >
 > 可能的解释：https://zhuanlan.zhihu.com/p/81784947
 
-`Spark`==专注于数据的计算==，而==数据的存储==在生产环境中往往还是由Hadoop分布式文件系统==HDFS==承担。
+`Spark`==专注于数据的计算==，而==数据的存储==在生产环境中往往还是由`Hadoop`分布式文件系统==HDFS==承担。
 
 ### 优势
 
-#### 对比Hadoop
+#### 对比`Hadoop`
 
 - 支持多种数据计算需求
   - 流式迭代的类MR计算
@@ -443,13 +441,13 @@
 
 > `Spark`曾经是一个`Hadoop`应用程序，但是`Spark`并不一定要依赖于`Hadoop`
 
-#### 对比MapReduce
+#### 对比`MapReduce`
 
 `Spark`是在`Hadoop`开创的分布式计算框架下对`MapReduce`编程范式进行扩展的一种更加通用的并行计算框架。
 
 - 独立性更强
 
-- 基于内存：RDD，速度更快；基于内存的计算快100x倍，基于硬盘的快10x倍
+- 基于内存：`RDD`，速度更快；基于内存的计算快100x倍，基于硬盘的快10x倍
 
 - 支持更多数据计算方法：`transformation`，`action`等
 
@@ -503,7 +501,7 @@ Cluster是真正的集群模式
 
 #### Client提交模式
 
-在`worker`节点启动`Driver`程序运行应用程序，结果返回到`Client`端。
+在`Worker`节点启动`Driver`程序运行应用程序，结果返回到`Client`端。
 
 #### Cluster提交模式
 
@@ -528,11 +526,11 @@ Cluster是真正的集群模式
 
 #### 特点
 
-- 数据存储到内存和磁盘中
+- 数据存储到内存和磁盘；
 
-- 控制数据分区
+- 控制数据分区；
 
-- 丰富的API操作数据
+- 丰富的API操作数据；
 
 #### 五大特性
 
@@ -579,15 +577,15 @@ Cluster是真正的集群模式
 
 优先内存，实在放不下则放到磁盘里。
 
-##### 基于Lineage（血统）的高效容错机制 ==`效率考虑` `容错考虑`==
+##### 基于`Lineage`（血统）的高效容错机制 ==`效率考虑` `容错考虑`==
 
 记录每一个数据分片的计算来源，便于快速恢复。
 
-##### Task如果失败会自动进行特定次数的重试 ==`容错考虑`==
+##### `Task`如果失败会自动进行特定次数的重试 ==`容错考虑`==
 
 `TaskScheduler`获取一个`Stage`的`TaskSet`，运行它们；默认4次。
 
-##### Stage如果失败会自动进行特定次数的重试 ==`容错考虑`==
+##### `Stage`如果失败会自动进行特定次数的重试 ==`容错考虑`==
 
 `DAGScheduler`调度`Stage`，`Stage`跟踪执行情况；默认4次。
 
@@ -629,11 +627,11 @@ Cluster是真正的集群模式
 
 ![image-20211015210017829](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211015210017829.png)
 
-- `Transformation`：从持久化存储中通过*变换*（**Transformations**，如 *map* 或者 *filter*）将其载入内存，然后可以对 RDD 施加任何系统支持的一系列变换。它只是一个声明，不碰到Action运算不会进行。
+- `Transformation`：从持久化存储中通过*变换*（**`Transformations`**，如 *map* 或者 *filter*）将其载入内存，然后可以对 `RDD` 施加任何系统支持的一系列变换。它只是一个声明，不碰到Action运算不会进行。
 
-- `Action`：将 RDD 重新持久化到外存中或者将控制权交还用户。
+- `Action`：将 `RDD` 重新持久化到外存中或者将控制权交还用户。
 - `Application`：客户端的一次提交，可以看作一个主函数。
-- `Job`：由action触发的一系列计算任务。
+- `Job`：由`action`触发的一系列计算任务。
 - `Stage`：把一个`job`按照宽依赖分割成若干阶段。
 - `Task`：把`stage`根据RDD分区数进行区分。
 
@@ -643,9 +641,9 @@ Cluster是真正的集群模式
 
 `Hadoop`不能基于内存共享数据，==反复读写磁盘==。因此，`Hadoop`的`MapReduce`对==迭代==式算法支持的效率不高，更别提图算法和机器学习算法了。
 
-`Spark`适应于在交互式数据挖掘工具中反复查询一个数据子集的应用场景。
+`Spark`适应于==在交互式数据挖掘工具中反复查询一个数据子集的==应用场景。
 
-#### 缓存（Cache）
+#### 缓存（`Cache`）
 
 将RDD保存到内存（也可能在磁盘上），读写速度极快。
 
@@ -664,19 +662,19 @@ Cluster是真正的集群模式
 - 某个步骤计算非常耗时，步骤完成后对结果进行缓存；
 - 进行`checkpoint`前也会缓存；
 
-#### Checkpoint
+#### `Checkpoint`
 
-将RDD持久化到HDFS，利用HDFS的容错能力降低RDD数据丢失的风险。
+将`RDD`持久化到`HDFS`，利用`HDFS`的容错能力降低`RDD`数据丢失的风险。
 
-它会将RDD的依赖清空，如果HDFS也不能保证数据不丢失，则任务需要重新启动。
+它会将`RDD`的依赖清空，如果`HDFS`也不能保证数据不丢失，则任务需要重新启动。
 
 #### 四个层次的容错
 
-- Stage输出失败，上层调度器`DAGScheduler`重试
+- `Stage`输出失败，上层调度器`DAGScheduler`重试
 
-- Task内部任务失败，底层`TaskScheduler`调度器重试
+- `Task`内部任务失败，底层`TaskScheduler`调度器重试
 
-- 根据RDD Lineage血统重新计算
+- 根据`RDD Lineage`血统重新计算
   - 对于宽依赖而言，如果结果的一个`Partition`出错，需要重新计算父`RDD`所有`Partition`
   - 对于窄依赖而言，如果结果的一个`Partition`出错，只需重新计算父RDD被丢失`Partition`依赖的那个`Partition`
   - `Cache`可看作时`Lineage`容错机制的效率提升机制，本身并无容错考虑，如果`Cache`丢失则仍需重新计算
@@ -687,8 +685,8 @@ Cluster是真正的集群模式
 
 调度器，简洁清晰和高效。
 
-- 输入：Spark RDD
-- 输出：执行器Executor
+- 输入：`Spark RDD`
+- 输出：执行器`Executor`
 
 ![image-20211018141659263](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211018141659263.png)
 
@@ -885,8 +883,8 @@ Cluster是真正的集群模式
 
 #### 二次排序
 
-- 指在==归约（reduce）阶段==对==某个键关联的值==排序；
-- ==Map阶段==可以对`<key, value>`对按照键的值进行排序，但是归约器不会自动对键值对按照值排序；但是有时候需要：将成绩按照班级==归约后排序==；店铺产品销量排序等
+- 指在==归约（`reduce`）阶段==对==某个键关联的值==排序；
+- ==`Map`阶段==可以对`<key, value>`对按照键的值进行排序，但是归约器不会自动对键值对按照值排序；但是有时候需要：将成绩按照班级==归约后排序==；店铺产品销量排序等
 
 ##### 例：按照`name`（第一标准）和`time`（第二标准）对`value`排序
 
@@ -953,7 +951,7 @@ Spark SQL是`Spark Core`上的一个模块，所有`SQL`操作被`Catalyst`翻�
 
 它是根据待处理数据和待执行计算的结构信息，做了额外优化。
 
-#### Spark Catalyst
+#### `Spark Catalyst`
 
 - 解析、优化`Spark SQL`语句，最终生成`Java`字节码；
 - 使用核心数据结构-树-存储`SQL`语句；
@@ -1003,13 +1001,13 @@ Spark SQL是`Spark Core`上的一个模块，所有`SQL`操作被`Catalyst`翻�
 - 创建数据表，并使用SQL操作
 - 判断是否是流
 
-##### Window Operations on Event Time
+##### `Window Operations on Event Time`
 
 ![image-20211021101455071](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021101455071.png)
 
 5分钟统计一次，10分钟是一个窗口。统计的不仅仅是从开始时间点到数据截止时的总出现次数，而是这10分钟的窗口期内出现的次数。
 
-##### Handling Late Data and Watermarking
+##### `Handling Late Data and Watermarking`
 
 ![image-20211021101806557](https://oss.ydjsir.com.cn/GitPages/SparkWithHadoop/image-20211021101806557.png)
 
@@ -1023,7 +1021,7 @@ Spark SQL是`Spark Core`上的一个模块，所有`SQL`操作被`Catalyst`翻�
 
 **输出的细节**: 数据格式和位置等.
 
-**输出模式**：每一次计算之后哪些数据被写入，包括Append模式，Complete模式和Update模式.
+**输出模式**：每一次计算之后哪些数据被写入，包括`Append`模式，`Complete`模式和`Update`模式.
 
 **应用名称**: 可选的，为该结构化流计算命名，是唯一的.
 
